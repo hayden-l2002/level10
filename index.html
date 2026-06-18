@@ -13,437 +13,286 @@
       --border: #e8e8e5;
       --text: #111111;
       --muted: #888888;
-      --faint: #bbbbbb;
+      --faint: #c0c0bc;
       --accent: #4f46e5;
       --accent-bg: #eef2ff;
-      --green: #16a34a;
-      --green-bg: #dcfce7;
-      --red: #dc2626;
-      --red-bg: #fee2e2;
-      --amber: #b45309;
-      --amber-bg: #fef3c7;
+      --green: #16a34a; --green-bg: #dcfce7;
+      --red: #dc2626;   --red-bg: #fee2e2;
+      --amber: #b45309; --amber-bg: #fef3c7;
       --r: 12px;
       --sh: 0 1px 3px rgba(0,0,0,0.07);
     }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      font-size: 14px;
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
 
-    /* ─ Topbar ─────────────────────────────── */
-    .topbar {
-      background: #0a0a0a;
-      height: 52px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 24px;
-      position: sticky;
-      top: 0;
-      z-index: 200;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      color: #fff;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-    }
-
-    .brand-icon {
-      width: 27px; height: 27px;
-      background: var(--accent);
-      border-radius: 6px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 900; color: #fff;
-    }
-
+    /* ── Topbar ─────────────────── */
+    .topbar { background: #0a0a0a; height: 52px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; position: sticky; top: 0; z-index: 200; }
+    .brand { display: flex; align-items: center; gap: 9px; color: #fff; font-size: 13px; font-weight: 700; }
+    .brand-icon { width: 27px; height: 27px; background: var(--accent); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; color: #fff; }
     .topbar-right { display: flex; align-items: center; gap: 12px; }
-
-    .live-badge {
-      display: none;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      padding: 4px 12px;
-      border-radius: 100px;
-    }
-    .live-badge.visible { display: flex; }
-
-    .live-dot {
-      width: 6px; height: 6px; background: #4ade80;
-      border-radius: 50%; animation: pulse 2s infinite;
-    }
+    .live-badge { display: none; align-items: center; gap: 6px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); padding: 4px 12px; border-radius: 100px; }
+    .live-badge.on { display: flex; }
+    .live-dot { width: 6px; height: 6px; background: #4ade80; border-radius: 50%; animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.25} }
-
     .g-timer { font-size: 12px; font-weight: 700; color: #fff; font-variant-numeric: tabular-nums; letter-spacing: .04em; }
     .topbar-date { font-size: 12px; color: #555; font-weight: 500; }
 
-    /* ─ Subnav ──────────────────────────────── */
-    .subnav {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      padding: 0 24px;
-      gap: 0;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      position: sticky;
-      top: 52px;
-      z-index: 100;
-    }
+    /* ── Subnav ─────────────────── */
+    .subnav { background: var(--surface); border-bottom: 1px solid var(--border); display: flex; padding: 0 24px; overflow-x: auto; -webkit-overflow-scrolling: touch; position: sticky; top: 52px; z-index: 100; }
     .subnav::-webkit-scrollbar { display: none; }
-
-    .nav-tab {
-      padding: 14px 12px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--muted);
-      white-space: nowrap;
-      cursor: pointer;
-      border-bottom: 2px solid transparent;
-      transition: color .15s, border-color .15s;
-      user-select: none;
-    }
+    .nav-tab { padding: 14px 12px; font-size: 13px; font-weight: 500; color: var(--muted); white-space: nowrap; cursor: pointer; border-bottom: 2px solid transparent; transition: color .15s, border-color .15s; user-select: none; }
     .nav-tab:hover { color: var(--text); }
     .nav-tab.on { color: var(--text); font-weight: 700; border-bottom-color: var(--accent); }
 
-    /* ─ Main ────────────────────────────────── */
-    .main { max-width: 860px; margin: 0 auto; padding: 40px 24px 100px; }
+    /* ── Main ───────────────────── */
+    .main { max-width: 860px; margin: 0 auto; padding: 32px 24px 100px; }
 
-    /* ─ Page header ─────────────────────────── */
-    .ph { margin-bottom: 28px; }
-    .ph-eye { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: 7px; }
-    .ph-title { font-size: 30px; font-weight: 800; letter-spacing: -.04em; color: #0a0a0a; margin-bottom: 12px; }
-    .ph-title em { font-style: normal; color: var(--accent); }
-    .ph-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-
-    .chip {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: #fff; border: 1px solid var(--border);
-      padding: 4px 10px; border-radius: 100px;
-      font-size: 12px; font-weight: 500; color: #555;
-      box-shadow: var(--sh);
+    /* ── CEO Briefing ───────────── */
+    .brief {
+      background: #0a0a0a;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+      color: #fff;
     }
 
-    .av {
-      width: 20px; height: 20px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 9px; font-weight: 800; color: #fff; flex-shrink: 0;
-    }
+    .brief-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px; }
+    .brief-hello { font-size: 22px; font-weight: 800; letter-spacing: -.03em; display: block; }
+    .brief-sub { font-size: 13px; color: #666; margin-top: 3px; }
+    .brief-collapse { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); color: #888; font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 100px; cursor: pointer; font-family: inherit; white-space: nowrap; }
+    .brief-collapse:hover { color: #bbb; }
 
-    /* ─ Alert ───────────────────────────────── */
-    .alert {
-      display: flex; align-items: flex-start; gap: 12px;
-      background: #fff5f5; border: 1px solid #fca5a5;
-      border-radius: var(--r); padding: 14px 16px; margin-bottom: 14px;
-    }
+    .brief-kpis { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 16px; }
+    .bkpi { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: 10px; padding: 14px 16px; }
+    .bkpi-lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #555; margin-bottom: 6px; }
+    .bkpi-val { font-size: 22px; font-weight: 800; letter-spacing: -.03em; color: #fff; }
+    .bkpi-sub { font-size: 11px; color: #555; margin-top: 4px; line-height: 1.5; }
+    .bkpi-val.green { color: #4ade80; }
+    .bkpi-val.amber { color: #fbbf24; }
+
+    .brief-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    .brief-section-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #555; margin-bottom: 8px; }
+
+    .brief-events { display: flex; flex-direction: column; gap: 5px; }
+    .bevent { display: flex; align-items: center; gap: 10px; }
+    .bevent-time { font-size: 11px; font-weight: 700; color: #555; font-variant-numeric: tabular-nums; min-width: 52px; }
+    .bevent-name { font-size: 12px; font-weight: 500; color: #ccc; }
+    .bevent-name.done { color: #444; text-decoration: line-through; }
+    .bevent-name.hot { color: #fbbf24; }
+
+    .brief-alerts-list { display: flex; flex-direction: column; gap: 5px; }
+    .balert { display: flex; align-items: flex-start; gap: 8px; padding: 8px 10px; border-radius: 7px; }
+    .balert.crit { background: rgba(220,38,38,.12); border: 1px solid rgba(220,38,38,.2); }
+    .balert.warn { background: rgba(245,158,11,.08); border: 1px solid rgba(245,158,11,.15); }
+    .balert.info { background: rgba(79,70,229,.1); border: 1px solid rgba(79,70,229,.2); }
+    .balert-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+    .balert.crit .balert-dot { background: #f87171; }
+    .balert.warn .balert-dot { background: #fbbf24; }
+    .balert.info .balert-dot { background: #818cf8; }
+    .balert-text { font-size: 12px; color: #aaa; line-height: 1.5; }
+    .balert-text strong { color: #fff; font-weight: 600; }
+
+    /* ── Alert banner ───────────── */
+    .alert { display: flex; align-items: flex-start; gap: 12px; background: #fff5f5; border: 1px solid #fca5a5; border-radius: var(--r); padding: 14px 16px; margin-bottom: 14px; }
     .alert-bar { width: 3px; border-radius: 3px; background: var(--red); flex-shrink: 0; align-self: stretch; }
     .alert-title { font-size: 13px; font-weight: 700; color: #991b1b; margin-bottom: 3px; }
     .alert-body { font-size: 12px; color: #b91c1c; line-height: 1.6; }
 
-    /* ─ Client strip ─────────────────────────── */
-    .cstrip {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--r); padding: 16px 20px;
-      margin-bottom: 14px; box-shadow: var(--sh);
-    }
+    /* ── Client strip ───────────── */
+    .cstrip { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 16px 20px; margin-bottom: 14px; box-shadow: var(--sh); }
     .cstrip-hd { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
     .cstrip-title { font-size: 13px; font-weight: 700; }
     .cstrip-sub { font-size: 12px; color: var(--muted); }
     .cstrip-grid { display: flex; flex-wrap: wrap; gap: 5px; }
-
-    .cchip {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 4px 9px; border-radius: 100px; font-size: 11px; font-weight: 600;
-      border: 1px solid var(--border); background: #fff; color: #555;
-    }
+    .cchip { display: inline-flex; align-items: center; gap: 5px; padding: 4px 9px; border-radius: 100px; font-size: 11px; font-weight: 600; border: 1px solid var(--border); background: #fff; color: #555; }
     .cchip::before { content: ''; width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
     .cchip.ok::before { background: var(--green); }
     .cchip.warn::before { background: #f59e0b; }
     .cchip.crit::before { background: var(--red); }
 
-    /* ─ Progress ─────────────────────────────── */
-    .prog {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--r); padding: 14px 18px;
-      margin-bottom: 14px; box-shadow: var(--sh);
-    }
+    /* ── Page header ────────────── */
+    .ph { margin-bottom: 20px; }
+    .ph-eye { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: 7px; }
+    .ph-title { font-size: 28px; font-weight: 800; letter-spacing: -.04em; color: #0a0a0a; margin-bottom: 12px; }
+    .ph-title em { font-style: normal; color: var(--accent); }
+    .ph-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .chip { display: inline-flex; align-items: center; gap: 6px; background: #fff; border: 1px solid var(--border); padding: 4px 10px; border-radius: 100px; font-size: 12px; font-weight: 500; color: #555; box-shadow: var(--sh); }
+    .av { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 800; color: #fff; flex-shrink: 0; }
+
+    /* ── Progress ───────────────── */
+    .prog { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 14px 18px; margin-bottom: 14px; box-shadow: var(--sh); }
     .prog-hd { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
     .prog-lbl { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
     .prog-cur { font-size: 12px; font-weight: 600; color: #555; }
     .prog-track { display: flex; gap: 3px; height: 4px; margin-bottom: 6px; }
     .ps { flex: 1; border-radius: 100px; background: #ebebea; transition: background .3s; }
-    .ps.done { background: #ccc; }
-    .ps.live { background: var(--accent); }
+    .ps.done { background: #ccc; } .ps.live { background: var(--accent); }
     .prog-names { display: flex; justify-content: space-between; }
     .pn { font-size: 10px; color: var(--faint); font-weight: 500; flex: 1; text-align: center; transition: color .3s; }
-    .pn.done { color: #999; }
-    .pn.live { color: var(--text); font-weight: 700; }
+    .pn.done { color: #999; } .pn.live { color: var(--text); font-weight: 700; }
 
-    /* ─ Start button ─────────────────────────── */
+    /* ── Start button ───────────── */
     .start-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
-
-    .start-btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--accent); color: #fff; border: none;
-      border-radius: 100px; padding: 10px 22px;
-      font-size: 13px; font-weight: 700; cursor: pointer;
-      transition: opacity .15s; letter-spacing: .01em;
-      font-family: inherit;
-    }
+    .start-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #fff; border: none; border-radius: 100px; padding: 10px 22px; font-size: 13px; font-weight: 700; cursor: pointer; transition: opacity .15s; font-family: inherit; }
     .start-btn:hover { opacity: .85; }
     .start-btn.stop { background: var(--red); }
-
     .btn-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.5); flex-shrink: 0; }
     .start-btn.stop .btn-dot { background: #fff; animation: pulse 1s infinite; }
-
     .start-hint { font-size: 12px; color: var(--muted); }
 
-    /* ─ Cards ────────────────────────────────── */
-    .card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--r); margin-bottom: 8px; box-shadow: var(--sh);
-      overflow: hidden; transition: border-color .2s, box-shadow .2s;
-    }
+    /* ── Cards ──────────────────── */
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); margin-bottom: 8px; box-shadow: var(--sh); overflow: hidden; transition: border-color .2s, box-shadow .2s; }
     .card.on { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-bg), var(--sh); }
-
-    .card-hd {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 20px; cursor: pointer; user-select: none;
-    }
+    .card-hd { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; cursor: pointer; user-select: none; }
     .card-hd-l { display: flex; align-items: center; gap: 9px; }
-
-    .num {
-      width: 21px; height: 21px; border-radius: 50%;
-      background: var(--bg); border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 10px; font-weight: 800; color: var(--muted); flex-shrink: 0;
-    }
+    .num { width: 21px; height: 21px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; color: var(--muted); flex-shrink: 0; }
     .card.on .num { background: var(--accent); border-color: var(--accent); color: #fff; }
-
     .card-title { font-size: 15px; font-weight: 700; letter-spacing: -.01em; }
-
-    .tpill {
-      background: var(--bg); border: 1px solid var(--border);
-      color: var(--muted); font-size: 11px; font-weight: 600;
-      padding: 2px 8px; border-radius: 100px;
-    }
-
+    .tpill { background: var(--bg); border: 1px solid var(--border); color: var(--muted); font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 100px; }
     .card-hd-r { display: flex; align-items: center; gap: 8px; }
-
     .stimer { font-size: 12px; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; display: none; }
     .card.on .stimer { display: block; color: var(--accent); }
-
     .chevron { width: 16px; height: 16px; color: var(--faint); transition: transform .2s; flex-shrink: 0; }
     .card.closed .chevron { transform: rotate(180deg); }
-
     .card-body { padding: 0 20px 20px; }
     .card.closed .card-body { display: none; }
-
     .card-desc { font-size: 13px; color: var(--muted); margin-bottom: 12px; line-height: 1.6; }
 
-    /* ─ Textarea ────────────────────────────── */
-    .note {
-      width: 100%; background: var(--bg); border: 1px solid var(--border);
-      border-radius: 8px; padding: 11px 13px; font-size: 13px;
-      color: #333; font-family: inherit; resize: vertical;
-      min-height: 80px; outline: none; transition: border-color .15s;
-    }
+    .note { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 11px 13px; font-size: 13px; color: #333; font-family: inherit; resize: vertical; min-height: 80px; outline: none; transition: border-color .15s; }
     .note::placeholder { color: var(--faint); }
     .note:focus { border-color: #aaa; background: #fff; }
 
-    /* ─ Scorecard ───────────────────────────── */
+    /* ── Scorecard ──────────────── */
     .sc-table { width: 100%; border-collapse: collapse; }
-    .sc-table thead th {
-      text-align: left; font-size: 10px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: .1em;
-      color: var(--muted); padding: 0 0 10px;
-      border-bottom: 1px solid var(--border);
-    }
+    .sc-table thead th { text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); padding: 0 0 10px; border-bottom: 1px solid var(--border); }
     .sc-table thead th:not(:first-child) { text-align: right; }
     .sc-table tbody tr { border-bottom: 1px solid #f4f4f2; }
     .sc-table tbody tr:last-child { border-bottom: none; }
     .sc-table tbody tr:hover { background: #fafaf8; }
     .sc-table tbody td { padding: 11px 0; vertical-align: middle; }
     .sc-table tbody td:not(:first-child) { text-align: right; }
-
     .m-name { font-size: 13px; font-weight: 500; }
     .m-tgt { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
     .m-act { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
     .m-val { font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
     .mbar { width: 68px; height: 3px; background: #ebebea; border-radius: 100px; overflow: hidden; }
     .mfill { height: 100%; border-radius: 100px; }
-
-    .badge {
-      display: inline-flex; align-items: center; gap: 4px;
-      padding: 3px 9px; border-radius: 100px; font-size: 10px;
-      font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
-    }
+    .badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 100px; font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
     .badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
     .bg { background: var(--green-bg); color: var(--green); } .bg::before { background: var(--green); }
     .br { background: var(--red-bg); color: var(--red); } .br::before { background: var(--red); }
     .ba { background: var(--amber-bg); color: var(--amber); } .ba::before { background: #f59e0b; }
-
     .sc-summary { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-top: 16px; }
     .sct { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; text-align: center; }
     .sct-n { font-size: 24px; font-weight: 800; letter-spacing: -.04em; }
     .sct-l { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-top: 2px; }
     .c-red { color: var(--red); } .c-amber { color: #d97706; } .c-green { color: var(--green); }
 
-    /* ─ Rocks ───────────────────────────────── */
+    /* ── Tracker card ───────────── */
+    .tracker-kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+    .tkpi {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 11px; padding: 18px 20px;
+      display: flex; flex-direction: column;
+    }
+    .tkpi-lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 8px; }
+    .tkpi-val { font-size: 34px; font-weight: 800; letter-spacing: -.04em; color: #111; font-variant-numeric: tabular-nums; }
+    .tkpi-val.loading { color: var(--faint); font-size: 24px; }
+    .tkpi-target { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .tkpi-sub { font-size: 11px; margin-top: 6px; font-weight: 600; }
+    .tkpi-sub.good { color: var(--green); } .tkpi-sub.bad { color: var(--red); } .tkpi-sub.mid { color: #d97706; }
+
+    .sheet-connect { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+    .sheet-connect-title { font-size: 12px; font-weight: 700; color: #333; margin-bottom: 4px; }
+    .sheet-connect-hint { font-size: 11px; color: var(--muted); margin-bottom: 10px; line-height: 1.6; }
+    .sheet-row { display: flex; gap: 7px; }
+    .sheet-input { flex: 1; background: #fff; border: 1px solid var(--border); border-radius: 7px; padding: 8px 11px; font-size: 12px; font-family: inherit; outline: none; color: #111; transition: border-color .15s; }
+    .sheet-input:focus { border-color: var(--accent); }
+    .sheet-input::placeholder { color: var(--faint); }
+    .sheet-btn { background: var(--accent); color: #fff; border: none; border-radius: 7px; padding: 8px 14px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: inherit; white-space: nowrap; }
+    .sheet-btn:hover { opacity: .85; }
+    .sheet-status-row { display: flex; align-items: center; gap: 7px; margin-top: 8px; }
+    .sheet-status { font-size: 11px; font-weight: 700; }
+    .sheet-status.ok { color: var(--green); }
+    .sheet-status.err { color: var(--red); }
+    .sheet-status.none { color: var(--muted); }
+    .sheet-refresh { font-size: 11px; color: var(--accent); cursor: pointer; font-weight: 600; }
+
+    /* ── Rocks ──────────────────── */
     .rocks { display: flex; flex-direction: column; gap: 7px; }
-
-    .rock {
-      display: flex; align-items: center; gap: 10px;
-      padding: 11px 13px; background: var(--bg);
-      border: 1px solid var(--border); border-radius: 9px;
-    }
-
-    .rcheck {
-      width: 20px; height: 20px; border-radius: 50%;
-      border: 2px solid var(--border); background: #fff;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; flex-shrink: 0; transition: all .15s;
-    }
+    .rock { display: flex; align-items: center; gap: 10px; padding: 11px 13px; background: var(--bg); border: 1px solid var(--border); border-radius: 9px; }
+    .rcheck { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border); background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: all .15s; }
     .rcheck.off { border-color: var(--red); background: var(--red-bg); }
     .rcheck.on { border-color: var(--green); background: var(--green-bg); }
     .rcheck.done { border-color: #111; background: #111; }
-
-    .rcheck-icon { width: 8px; height: 8px; border-radius: 1px; flex-shrink: 0; }
+    .rcheck-icon { width: 8px; height: 8px; }
     .rcheck.off .rcheck-icon { width: 8px; height: 2px; background: var(--red); border-radius: 1px; }
     .rcheck.on .rcheck-icon { width: 5px; height: 9px; border-right: 2px solid var(--green); border-bottom: 2px solid var(--green); transform: rotate(45deg) translate(-1px,-2px); background: none; border-radius: 0; }
     .rcheck.done .rcheck-icon { width: 5px; height: 9px; border-right: 2px solid #fff; border-bottom: 2px solid #fff; transform: rotate(45deg) translate(-1px,-2px); background: none; border-radius: 0; }
-
     .r-text { font-size: 13px; font-weight: 500; flex: 1; }
     .r-owner { font-size: 11px; color: var(--muted); background: #fff; border: 1px solid var(--border); padding: 2px 8px; border-radius: 100px; white-space: nowrap; font-weight: 600; }
 
-    /* ─ Headlines ───────────────────────────── */
+    /* ── Headlines ──────────────── */
     .htabs { display: flex; gap: 4px; margin-bottom: 12px; }
-    .htab {
-      padding: 5px 12px; border-radius: 100px; font-size: 12px; font-weight: 600;
-      cursor: pointer; background: var(--bg); border: 1px solid var(--border);
-      color: var(--muted); transition: all .15s; user-select: none; font-family: inherit;
-    }
+    .htab { padding: 5px 12px; border-radius: 100px; font-size: 12px; font-weight: 600; cursor: pointer; background: var(--bg); border: 1px solid var(--border); color: var(--muted); transition: all .15s; user-select: none; font-family: inherit; }
     .htab.on { background: #111; color: #fff; border-color: #111; }
-
     .hlist { display: flex; flex-direction: column; gap: 7px; }
-
-    .hitem {
-      display: flex; align-items: flex-start; gap: 10px;
-      padding: 11px 13px; background: var(--bg);
-      border: 1px solid var(--border); border-radius: 9px;
-    }
-    .hico {
-      width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      margin-top: 1px;
-    }
-    .hico.good { background: var(--green-bg); }
-    .hico.bad { background: var(--amber-bg); }
-    .hico.action { background: #eff6ff; }
-
+    .hitem { display: flex; align-items: flex-start; gap: 10px; padding: 11px 13px; background: var(--bg); border: 1px solid var(--border); border-radius: 9px; }
+    .hico { width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+    .hico.good { background: var(--green-bg); } .hico.bad { background: var(--amber-bg); } .hico.action { background: #eff6ff; }
     .hico-dot { width: 7px; height: 7px; border-radius: 50%; }
-    .hico.good .hico-dot { background: var(--green); }
-    .hico.bad .hico-dot { background: #f59e0b; }
-    .hico.action .hico-dot { background: #3b82f6; }
-
+    .hico.good .hico-dot { background: var(--green); } .hico.bad .hico-dot { background: #f59e0b; } .hico.action .hico-dot { background: #3b82f6; }
     .hmain { flex: 1; }
     .h-text { font-size: 13px; font-weight: 500; line-height: 1.5; }
     .h-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-top: 3px; }
 
-    /* ─ Todos ───────────────────────────────── */
+    /* ── Todos ──────────────────── */
     .todos { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
-
-    .todo {
-      display: flex; align-items: center; gap: 9px;
-      padding: 10px 13px; background: var(--bg);
-      border: 1px solid var(--border); border-radius: 9px;
-      transition: opacity .2s;
-    }
+    .todo { display: flex; align-items: center; gap: 9px; padding: 10px 13px; background: var(--bg); border: 1px solid var(--border); border-radius: 9px; transition: opacity .2s; }
     .todo.done { opacity: .45; }
-
-    .tcb {
-      width: 17px; height: 17px; border-radius: 4px;
-      border: 2px solid var(--border); background: #fff;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; flex-shrink: 0; transition: all .15s;
-    }
+    .tcb { width: 17px; height: 17px; border-radius: 4px; border: 2px solid var(--border); background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: all .15s; }
     .tcb.on { background: #111; border-color: #111; }
-    .tcb-check { width: 4px; height: 7px; border-right: 2px solid transparent; border-bottom: 2px solid transparent; transform: rotate(45deg) translate(-1px,-1px); border-radius: 0; }
+    .tcb-check { width: 4px; height: 7px; border-right: 2px solid transparent; border-bottom: 2px solid transparent; transform: rotate(45deg) translate(-1px,-1px); }
     .tcb.on .tcb-check { border-color: #fff; }
-
     .todo-text { font-size: 13px; font-weight: 500; flex: 1; }
     .todo.done .todo-text { text-decoration: line-through; }
-
     .t-owner { font-size: 11px; font-weight: 600; color: #555; background: #fff; border: 1px solid var(--border); padding: 2px 8px; border-radius: 100px; white-space: nowrap; }
     .t-urgent { font-size: 10px; font-weight: 700; background: var(--red-bg); color: var(--red); padding: 2px 8px; border-radius: 100px; white-space: nowrap; }
+    .t-new { font-size: 10px; font-weight: 700; background: var(--accent-bg); color: var(--accent); padding: 2px 8px; border-radius: 100px; white-space: nowrap; }
 
     .addrow { display: flex; gap: 7px; }
-    .addinput {
-      flex: 1; background: var(--bg); border: 1px solid var(--border);
-      border-radius: 7px; padding: 8px 11px; font-size: 13px;
-      font-family: inherit; outline: none; color: #111; transition: border-color .15s;
-    }
+    .addinput { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 7px; padding: 8px 11px; font-size: 13px; font-family: inherit; outline: none; color: #111; transition: border-color .15s; }
     .addinput:focus { border-color: #999; background: #fff; }
     .addinput::placeholder { color: var(--faint); }
-    .addbtn {
-      background: #111; color: #fff; border: none; border-radius: 7px;
-      padding: 8px 14px; font-size: 12px; font-weight: 700; cursor: pointer;
-      transition: background .15s; white-space: nowrap; font-family: inherit;
-    }
+    .addbtn { background: #111; color: #fff; border: none; border-radius: 7px; padding: 8px 14px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: inherit; white-space: nowrap; }
     .addbtn:hover { background: #333; }
 
-    /* ─ IDS ─────────────────────────────────── */
+    /* ── IDS ────────────────────── */
     .ids-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 16px; }
     .ids-box { background: var(--bg); border: 1px solid var(--border); border-radius: 9px; padding: 13px; }
-    .ids-letter { font-size: 20px; font-weight: 800; color: #111; letter-spacing: -.03em; }
+    .ids-letter { font-size: 20px; font-weight: 800; color: #111; }
     .ids-word { font-size: 12px; font-weight: 700; margin-top: 2px; }
     .ids-hint { font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.5; }
-
     .issues { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
-
-    .issue {
-      display: flex; align-items: center; gap: 9px;
-      padding: 11px 13px; background: var(--bg);
-      border: 1px solid var(--border); border-radius: 9px;
-      cursor: pointer; transition: background .15s, border-color .15s, box-shadow .15s;
-    }
+    .issue { display: flex; align-items: center; gap: 9px; padding: 11px 13px; background: var(--bg); border: 1px solid var(--border); border-radius: 9px; cursor: pointer; transition: background .15s, border-color .15s; }
     .issue:hover { background: #f0f0ee; }
     .issue.live { background: #fff; border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-bg); }
-
     .idot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
     .i-text { font-size: 13px; font-weight: 500; flex: 1; }
     .i-tag { font-size: 11px; color: var(--muted); background: #fff; border: 1px solid var(--border); padding: 2px 8px; border-radius: 100px; white-space: nowrap; font-weight: 600; }
     .i-status { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); min-width: 68px; text-align: right; }
     .issue.live .i-status { color: var(--accent); }
 
-    /* ─ Conclude ────────────────────────────── */
+    /* ── Conclude ───────────────── */
     .conclude-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
     .cbox { background: var(--bg); border: 1px solid var(--border); border-radius: 9px; padding: 13px; }
     .cbox-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 7px; }
     .cbox-ta { width: 100%; background: transparent; border: none; font-size: 13px; font-family: inherit; color: #333; outline: none; resize: none; min-height: 56px; line-height: 1.6; }
     .cbox-ta::placeholder { color: var(--faint); }
-
     .rating-row { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
     .rating-lbl { font-size: 13px; font-weight: 600; color: #555; margin-right: 2px; }
-    .rbtn {
-      width: 32px; height: 32px; border-radius: 7px;
-      border: 1px solid var(--border); background: #fff;
-      font-size: 12px; font-weight: 700; cursor: pointer;
-      color: #555; transition: all .15s; font-family: inherit;
-      display: flex; align-items: center; justify-content: center;
-    }
+    .rbtn { width: 32px; height: 32px; border-radius: 7px; border: 1px solid var(--border); background: #fff; font-size: 12px; font-weight: 700; cursor: pointer; color: #555; transition: all .15s; font-family: inherit; display: flex; align-items: center; justify-content: center; }
     .rbtn:hover { border-color: var(--accent); color: var(--accent); }
     .rbtn.on { background: var(--accent); color: #fff; border-color: var(--accent); }
   </style>
@@ -451,15 +300,9 @@
 <body>
 
   <header class="topbar">
-    <div class="brand">
-      <div class="brand-icon">AD</div>
-      Amistad Digital
-    </div>
+    <div class="brand"><div class="brand-icon">AD</div>Amistad Digital</div>
     <div class="topbar-right">
-      <div class="live-badge" id="liveBadge">
-        <div class="live-dot"></div>
-        <span class="g-timer" id="gTimer">00:00</span>
-      </div>
+      <div class="live-badge" id="liveBadge"><div class="live-dot"></div><span class="g-timer" id="gTimer">00:00</span></div>
       <span class="topbar-date" id="topDate"></span>
     </div>
   </header>
@@ -477,15 +320,64 @@
 
   <main class="main">
 
-    <!-- Header -->
-    <div class="ph">
-      <div class="ph-eye">Weekly Leadership Meeting</div>
-      <div class="ph-title">Level 10 &mdash; <em>Amistad Digital</em></div>
-      <div class="ph-meta">
-        <div class="chip"><div class="av" style="background:#4f46e5;">H</div>Hayden</div>
-        <div class="chip"><div class="av" style="background:#0891b2;">D</div>David</div>
-        <div class="chip">Google Meet</div>
-        <div class="chip">Mondays &middot; 9 AM</div>
+    <!-- ── CEO Briefing ─────────────────────────────── -->
+    <div class="brief" id="briefWrap">
+      <div class="brief-top">
+        <div>
+          <span class="brief-hello">Good morning, Hayden</span>
+          <span class="brief-sub" id="briefDate">Thursday, June 18 &middot; Here&rsquo;s what matters today</span>
+        </div>
+        <button class="brief-collapse" onclick="toggleBrief()">Collapse</button>
+      </div>
+
+      <div id="briefBody">
+        <div class="brief-kpis">
+          <div class="bkpi">
+            <div class="bkpi-lbl">Cash In Today</div>
+            <div class="bkpi-val green">$331.82</div>
+            <div class="bkpi-sub">$237.93 Stripe &middot; $93.89 Skool</div>
+          </div>
+          <div class="bkpi">
+            <div class="bkpi-lbl">New Booking</div>
+            <div class="bkpi-val">Brad Jordan</div>
+            <div class="bkpi-sub">Confirmed today &middot; July 1 &middot; 1:30 PM</div>
+          </div>
+          <div class="bkpi">
+            <div class="bkpi-lbl">New Lead</div>
+            <div class="bkpi-val amber">1 Momence</div>
+            <div class="bkpi-sub">Unread message waiting in inbox</div>
+          </div>
+        </div>
+
+        <div class="brief-cols">
+          <div>
+            <div class="brief-section-title">Today&rsquo;s Remaining Schedule</div>
+            <div class="brief-events">
+              <div class="bevent"><span class="bevent-time">12:00 PM</span><span class="bevent-name done">GBP &mdash; Wendy (done &middot; GBP verified)</span></div>
+              <div class="bevent"><span class="bevent-time">12:30 PM</span><span class="bevent-name done">HighLevel Affiliate call (done)</span></div>
+              <div class="bevent"><span class="bevent-time">3:00 PM</span><span class="bevent-name">Batch 20&ndash;30 reach outs</span></div>
+              <div class="bevent"><span class="bevent-time">4:00 PM</span><span class="bevent-name">Check on Jackie referral</span></div>
+              <div class="bevent"><span class="bevent-time">4:30 PM</span><span class="bevent-name">Coaching call</span></div>
+              <div class="bevent"><span class="bevent-time">5:00 PM</span><span class="bevent-name">Eye on inside out GBP</span></div>
+              <div class="bevent" style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.06);">
+                <span class="bevent-time" style="color:#555;">Fri 8 AM</span><span class="bevent-name">Send Quinton invoice (full year)</span>
+              </div>
+              <div class="bevent">
+                <span class="bevent-time" style="color:#555;">Fri 2 PM</span><span class="bevent-name hot">Dennis Mitch Referral &mdash; DOUBLE BOOKING</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="brief-section-title">Alerts Needing Action</div>
+            <div class="brief-alerts-list">
+              <div class="balert crit"><div class="balert-dot"></div><div class="balert-text"><strong>2 GHL wallets suspended</strong> &mdash; Samosa House + Chestnut Development. Fix before this meeting.</div></div>
+              <div class="balert warn"><div class="balert-dot"></div><div class="balert-text"><strong>New Zapier error</strong> &mdash; Elite Landscapes LLC REP MGMT Zap. Check with David.</div></div>
+              <div class="balert warn"><div class="balert-dot"></div><div class="balert-text"><strong>Double booking Fri 2 PM</strong> &mdash; Hayden Larance call vs. Dennis Mitch Referral. Reschedule one.</div></div>
+              <div class="balert info"><div class="balert-dot"></div><div class="balert-text"><strong>2 new Google reviews</strong> &mdash; Mary &rarr; Taco King, Sophia &rarr; JMB Auto Sports. Respond today.</div></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -494,16 +386,13 @@
       <div class="alert-bar"></div>
       <div>
         <div class="alert-title">2 Client GHL Wallets Suspended &mdash; Action Required Before This Meeting</div>
-        <div class="alert-body">Samosa House and Chestnut Development hit the max failed payment limit (7 attempts). SMS, calls, and automations are at risk of stopping. Go to GHL &rarr; Settings &rarr; Company Billing and recharge both wallets manually.</div>
+        <div class="alert-body">Samosa House and Chestnut Development hit the max failed payment limit. Go to GHL &rarr; Settings &rarr; Company Billing and recharge both wallets manually.</div>
       </div>
     </div>
 
     <!-- Client health strip -->
     <div class="cstrip">
-      <div class="cstrip-hd">
-        <span class="cstrip-title">Client Account Health</span>
-        <span class="cstrip-sub">15 active &middot; 2 critical</span>
-      </div>
+      <div class="cstrip-hd"><span class="cstrip-title">Client Account Health</span><span class="cstrip-sub">15 active &middot; 2 critical</span></div>
       <div class="cstrip-grid">
         <div class="cchip crit">Samosa House</div>
         <div class="cchip crit">Chestnut Development</div>
@@ -523,49 +412,44 @@
       </div>
     </div>
 
+    <!-- Page header -->
+    <div class="ph">
+      <div class="ph-eye">Weekly Leadership Meeting</div>
+      <div class="ph-title">Level 10 &mdash; <em>Amistad Digital</em></div>
+      <div class="ph-meta">
+        <div class="chip"><div class="av" style="background:#4f46e5;">H</div>Hayden</div>
+        <div class="chip"><div class="av" style="background:#0891b2;">D</div>David</div>
+        <div class="chip">Google Meet</div>
+        <div class="chip">Mondays &middot; 9 AM</div>
+      </div>
+    </div>
+
     <!-- Start + Progress -->
     <div class="start-row">
-      <button class="start-btn" id="startBtn" onclick="toggleMeeting()">
-        <div class="btn-dot"></div>
-        Start Meeting
-      </button>
-      <span class="start-hint">90 min &middot; 7 sections</span>
+      <button class="start-btn" id="startBtn" onclick="toggleMeeting()"><div class="btn-dot"></div>Start Meeting</button>
+      <span class="start-hint">95 min &middot; 8 sections</span>
     </div>
 
     <div class="prog">
-      <div class="prog-hd">
-        <span class="prog-lbl">Meeting Progress</span>
-        <span class="prog-cur" id="progCur">Not started</span>
-      </div>
+      <div class="prog-hd"><span class="prog-lbl">Meeting Progress</span><span class="prog-cur" id="progCur">Not started</span></div>
       <div class="prog-track">
-        <div class="ps" data-i="0"></div><div class="ps" data-i="1"></div>
-        <div class="ps" data-i="2"></div><div class="ps" data-i="3"></div>
-        <div class="ps" data-i="4"></div><div class="ps" data-i="5"></div>
-        <div class="ps" data-i="6"></div>
+        <div class="ps" data-i="0"></div><div class="ps" data-i="1"></div><div class="ps" data-i="2"></div>
+        <div class="ps" data-i="3"></div><div class="ps" data-i="4"></div><div class="ps" data-i="5"></div>
+        <div class="ps" data-i="6"></div><div class="ps" data-i="7"></div>
       </div>
       <div class="prog-names">
-        <div class="pn" data-i="0">Segue</div>
-        <div class="pn" data-i="1">Scorecard</div>
-        <div class="pn" data-i="2">Rocks</div>
-        <div class="pn" data-i="3">Headlines</div>
-        <div class="pn" data-i="4">To-Do</div>
-        <div class="pn" data-i="5">IDS</div>
-        <div class="pn" data-i="6">Conclude</div>
+        <div class="pn" data-i="0">Segue</div><div class="pn" data-i="1">Scorecard</div>
+        <div class="pn" data-i="2">Tracker</div><div class="pn" data-i="3">Rocks</div>
+        <div class="pn" data-i="4">Headlines</div><div class="pn" data-i="5">To-Do</div>
+        <div class="pn" data-i="6">IDS</div><div class="pn" data-i="7">Conclude</div>
       </div>
     </div>
 
     <!-- 1. Segue -->
     <div class="card on" id="card-0">
       <div class="card-hd" onclick="toggleCard(0)">
-        <div class="card-hd-l">
-          <div class="num">1</div>
-          <span class="card-title">Segue</span>
-          <span class="tpill">5 min</span>
-        </div>
-        <div class="card-hd-r">
-          <span class="stimer" id="st-0">5:00</span>
-          <svg class="chevron" viewBox="0 0 16 16" fill="none"><path d="M4 10L8 6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
+        <div class="card-hd-l"><div class="num">1</div><span class="card-title">Segue</span><span class="tpill">5 min</span></div>
+        <div class="card-hd-r"><span class="stimer" id="st-0">5:00</span><svg class="chevron" viewBox="0 0 16 16" fill="none"><path d="M4 10L8 6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </div>
       <div class="card-body">
         <p class="card-desc">Personal and professional good news. Connect as humans before the numbers.</p>
@@ -576,70 +460,21 @@
     <!-- 2. Scorecard -->
     <div class="card closed" id="card-1">
       <div class="card-hd" onclick="toggleCard(1)">
-        <div class="card-hd-l">
-          <div class="num">2</div>
-          <span class="card-title">Scorecard</span>
-          <span class="tpill">5 min</span>
-        </div>
-        <div class="card-hd-r">
-          <span class="stimer" id="st-1">5:00</span>
-          <svg class="chevron" viewBox="0 0 16 16" fill="none"><path d="M4 10L8 6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
+        <div class="card-hd-l"><div class="num">2</div><span class="card-title">Scorecard</span><span class="tpill">5 min</span></div>
+        <div class="card-hd-r"><span class="stimer" id="st-1">5:00</span><svg class="chevron" viewBox="0 0 16 16" fill="none"><path d="M4 10L8 6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </div>
       <div class="card-body">
         <table class="sc-table">
-          <thead>
-            <tr><th>Metric</th><th>Target</th><th>Actual</th><th>Status</th></tr>
-          </thead>
+          <thead><tr><th>Metric</th><th>Target</th><th>Actual</th><th>Status</th></tr></thead>
           <tbody>
-            <tr>
-              <td><span class="m-name">Monthly Revenue</span></td>
-              <td><span class="m-tgt">$15K</span></td>
-              <td><div class="m-act"><span class="m-val">$988</span><div class="mbar"><div class="mfill" style="width:7%;background:#dc2626;"></div></div></div></td>
-              <td><span class="badge br">Off Track</span></td>
-            </tr>
-            <tr>
-              <td><span class="m-name">Active Clients</span></td>
-              <td><span class="m-tgt">20</span></td>
-              <td><div class="m-act"><span class="m-val">15</span><div class="mbar"><div class="mfill" style="width:75%;background:#f59e0b;"></div></div></div></td>
-              <td><span class="badge ba">Behind</span></td>
-            </tr>
-            <tr>
-              <td><span class="m-name">GHL Accounts Healthy</span></td>
-              <td><span class="m-tgt">100%</span></td>
-              <td><div class="m-act"><span class="m-val">87%</span><div class="mbar"><div class="mfill" style="width:87%;background:#f59e0b;"></div></div></div></td>
-              <td><span class="badge ba">Behind</span></td>
-            </tr>
-            <tr>
-              <td><span class="m-name">Sales Calls / Wk</span></td>
-              <td><span class="m-tgt">10</span></td>
-              <td><div class="m-act"><span class="m-val">3</span><div class="mbar"><div class="mfill" style="width:30%;background:#dc2626;"></div></div></div></td>
-              <td><span class="badge br">Off Track</span></td>
-            </tr>
-            <tr>
-              <td><span class="m-name">Outreach Sent / Wk</span></td>
-              <td><span class="m-tgt">40</span></td>
-              <td><div class="m-act"><span class="m-val">~25</span><div class="mbar"><div class="mfill" style="width:63%;background:#f59e0b;"></div></div></div></td>
-              <td><span class="badge ba">Behind</span></td>
-            </tr>
-            <tr>
-              <td><span class="m-name">Client Reviews Responded</span></td>
-              <td><span class="m-tgt">100%</span></td>
-              <td><div class="m-act"><span class="m-val">0 / 9</span><div class="mbar"><div class="mfill" style="width:0%;background:#dc2626;"></div></div></div></td>
-              <td><span class="badge br">Off Track</span></td>
-            </tr>
-            <tr>
-              <td><span class="m-name">Automations Running</span></td>
-              <td><span class="m-tgt">15</span></td>
-              <td><div class="m-act"><span class="m-val">14</span><div class="mbar"><div class="mfill" style="width:93%;background:#16a34a;"></div></div></div></td>
-              <td><span class="badge bg">On Track</span></td>
-            </tr>
-            <tr>
-              <td><span class="m-name">Stripe Payout (Week)</span></td>
-              <td><span class="m-tgt">$3K</span></td>
-              <td><div class="m-act"><span class="m-val">$988</span><div class="mbar"><div class="mfill" style="width:33%;background:#f59e0b;"></div></div></div></td>
-              <td><span class="badge ba">Behind</span></td>
-            </tr>
+            <tr><td><span class="m-name">Monthly Revenue</span></td><td><span class="m-tgt">$15K</span></td><td><div class="m-act"><span class="m-val">$988</span><div class="mbar"><div class="mfill" style="width:7%;background:#dc2626;"></div></div></div></td><td><span class="badge br">Off Track</span></td></tr>
+            <tr><td><span class="m-name">Active Clients</span></td><td><span class="m-tgt">20</span></td><td><div class="m-act"><span class="m-val">15</span><div class="mbar"><div class="mfill" style="width:75%;background:#f59e0b;"></div></div></div></td><td><span class="badge ba">Behind</span></td></tr>
+            <tr><td><span class="m-name">GHL Accounts Healthy</span></td><td><span class="m-tgt">100%</span></td><td><div class="m-act"><span class="m-val">87%</span><div class="mbar"><div class="mfill" style="width:87%;background:#f59e0b;"></div></div></div></td><td><span class="badge ba">Behind</span></td></tr>
+            <tr><td><span class="m-name">Sales Calls / Wk</span></td><td><span class="m-tgt">10</span></td><td><div class="m-act"><span class="m-val">3</span><div class="mbar"><div class="mfill" style="width:30%;background:#dc2626;"></div></div></div></td><td><span class="badge br">Off Track</span></td></tr>
+            <tr><td><span class="m-name">Outreach Sent / Wk</span></td><td><span class="m-tgt">40</span></td><td><div class="m-act"><span class="m-val">~25</span><div class="mbar"><div class="mfill" style="width:63%;background:#f59e0b;"></div></div></div></td><td><span class="badge ba">Behind</span></td></tr>
+            <tr><td><span class="m-name">Client Reviews Responded</span></td><td><span class="m-tgt">100%</span></td><td><div class="m-act"><span class="m-val">0 / 9</span><div class="mbar"><div class="mfill" style="width:0%;background:#dc2626;"></div></div></div></td><td><span class="badge br">Off Track</span></td></tr>
+            <tr><td><span class="m-name">Automations Running</span></td><td><span class="m-tgt">15</span></td><td><div class="m-act"><span class="m-val">14</span><div class="mbar"><div class="mfill" style="width:93%;background:#16a34a;"></div></div></div></td><td><span class="badge bg">On Track</span></td></tr>
+            <tr><td><span class="m-name">Stripe Payout (Week)</span></td><td><span class="m-tgt">$3K</span></td><td><div class="m-act"><span class="m-val">$988</span><div class="mbar"><div class="mfill" style="width:33%;background:#f59e0b;"></div></div></div></td><td><span class="badge ba">Behind</span></td></tr>
           </tbody>
         </table>
         <div class="sc-summary">
@@ -650,68 +485,71 @@
       </div>
     </div>
 
-    <!-- 3. Rock Review -->
+    <!-- 3. Tracker -->
     <div class="card closed" id="card-2">
       <div class="card-hd" onclick="toggleCard(2)">
-        <div class="card-hd-l">
-          <div class="num">3</div>
-          <span class="card-title">Rock Review</span>
-          <span class="tpill">5 min</span>
-        </div>
-        <div class="card-hd-r">
-          <span class="stimer" id="st-2">5:00</span>
-          <svg class="chevron" viewBox="0 0 16 16" fill="none"><path d="M4 10L8 6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
+        <div class="card-hd-l"><div class="num">3</div><span class="card-title">Tracker</span><span class="tpill">5 min</span></div>
+        <div class="card-hd-r"><span class="stimer" id="st-2">5:00</span><svg class="chevron" viewBox="0 0 16 16" fill="none"><path d="M4 10L8 6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </div>
       <div class="card-body">
-        <p class="card-desc">Q2 priorities. On track = will be done by end of quarter. Be honest, not hopeful.</p>
-        <div class="rocks">
-          <div class="rock">
-            <div class="rcheck off" onclick="cycleRock(this)"><div class="rcheck-icon"></div></div>
-            <span class="r-text">Automate every recurring manual task (monthly + daily)</span>
-            <span class="r-owner">Hayden</span>
+        <p class="card-desc">Live pipeline and revenue data pulled from your Google Sheet.</p>
+        <div class="tracker-kpis">
+          <div class="tkpi">
+            <div class="tkpi-lbl">Meetings Set</div>
+            <div class="tkpi-val" id="meetingsVal">—</div>
+            <div class="tkpi-target">Target: 10 / week</div>
+            <div class="tkpi-sub none" id="meetingsSub">Connect sheet below</div>
           </div>
-          <div class="rock">
-            <div class="rcheck off" onclick="cycleRock(this)"><div class="rcheck-icon"></div></div>
-            <span class="r-text">Launch CSM job posting + Meta ad campaign</span>
-            <span class="r-owner">Hayden</span>
+          <div class="tkpi">
+            <div class="tkpi-lbl">Cash Collected</div>
+            <div class="tkpi-val" id="cashVal">—</div>
+            <div class="tkpi-target">Target: $3K / week</div>
+            <div class="tkpi-sub none" id="cashSub">Connect sheet below</div>
           </div>
-          <div class="rock">
-            <div class="rcheck off" onclick="cycleRock(this)"><div class="rcheck-icon"></div></div>
-            <span class="r-text">Map complete customer journey end-to-end (finish CSV)</span>
-            <span class="r-owner">Hayden</span>
+        </div>
+
+        <div class="sheet-connect">
+          <div class="sheet-connect-title">Connect Google Sheet</div>
+          <div class="sheet-connect-hint">
+            In your Google Sheet: <strong>File &rarr; Share &rarr; Publish to web &rarr; CSV</strong>. Paste the URL below.<br/>
+            The sheet must have rows labeled &ldquo;Meetings Set&rdquo; and &ldquo;Cash Collected&rdquo; (or similar) with numeric values.
           </div>
-          <div class="rock">
-            <div class="rcheck on" onclick="cycleRock(this)"><div class="rcheck-icon"></div></div>
-            <span class="r-text">Deploy GHL review automation for all active clients</span>
-            <span class="r-owner">David</span>
+          <div class="sheet-row">
+            <input class="sheet-input" id="sheetUrlInput" placeholder="Paste published CSV URL here..." />
+            <button class="sheet-btn" onclick="connectSheet()">Connect</button>
           </div>
-          <div class="rock">
-            <div class="rcheck on" onclick="cycleRock(this)"><div class="rcheck-icon"></div></div>
-            <span class="r-text">Build and document standard onboarding flow for new clients</span>
-            <span class="r-owner">David</span>
-          </div>
-          <div class="rock">
-            <div class="rcheck off" onclick="cycleRock(this)"><div class="rcheck-icon"></div></div>
-            <span class="r-text">Close 5 new clients via outreach (20&ndash;30/wk batch)</span>
-            <span class="r-owner">Hayden</span>
+          <div class="sheet-status-row">
+            <span class="sheet-status none" id="sheetStatus">Not connected</span>
+            <span class="sheet-refresh" id="sheetRefresh" style="display:none;" onclick="refreshSheet()">Refresh</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 4. Headlines -->
+    <!-- 4. Rock Review -->
     <div class="card closed" id="card-3">
       <div class="card-hd" onclick="toggleCard(3)">
-        <div class="card-hd-l">
-          <div class="num">4</div>
-          <span class="card-title">Headlines</span>
-          <span class="tpill">5 min</span>
+        <div class="card-hd-l"><div class="num">4</div><span class="card-title">Rock Review</span><span class="tpill">5 min</span></div>
+        <div class="card-hd-r"><span class="stimer" id="st-3">5:00</span><svg class="chevron" viewBox="0 0 16 16" fill="none"><path d="M4 10L8 6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">Q2 priorities. On track = will be done by end of quarter. Be honest, not hopeful.</p>
+        <div class="rocks">
+          <div class="rock"><div class="rcheck off" onclick="cycleRock(this)"><div class="rcheck-icon"></div></div><span class="r-text">Automate every recurring manual task (monthly + daily)</span><span class="r-owner">Hayden</span></div>
+          <div class="rock"><div class="rcheck off" onclick="cycleRock(this)"><div class="rcheck-icon"></div></div><span class="r-text">Launch CSM job posting + Meta ad campaign</span><span class="r-owner">Hayden</span></div>
+          <div class="rock"><div class="rcheck off" onclick="cycleRock(this)"><div class="rcheck-icon"></div></div><span class="r-text">Map complete customer journey end-to-end (finish CSV)</span><span class="r-owner">Hayden</span></div>
+          <div class="rock"><div class="rcheck on" onclick="cycleRock(this)"><div class="rcheck-icon"></div></div><span class="r-text">Deploy GHL review automation for all active clients</span><span class="r-owner">David</span></div>
+          <div class="rock"><div class="rcheck on" onclick="cycleRock(this)"><div class="rcheck-icon"></div></div><span class="r-text">Build and document standard onboarding flow for new clients</span><span class="r-owner">David</span></div>
+          <div class="rock"><div class="rcheck off" onclick="cycleRock(this)"><div class="rcheck-icon"></div></div><span class="r-text">Close 5 new clients via outreach (20&ndash;30/wk batch)</span><span class="r-owner">Hayden</span></div>
         </div>
-        <div class="card-hd-r">
-          <span class="stimer" id="st-3">5:00</span>
-          <svg class="chevron" viewBox="0 0 16 16" fill="none"><path d="M4 10L8 6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
+      </div>
+    </div>
+
+    <!-- 5. Headlines -->
+    <div class="card closed" id="card-4">
+      <div class="card-hd" onclick="toggleCard(4)">
+        <div class="card-hd-l"><div class="num">5</div><span class="card-title">Headlines</span><span class="tpill">5 min</span></div>
+        <div class="card-hd-r"><span class="stimer" id="st-4">5:00</span><svg class="chevron" viewBox="0 0 16 16" fill="none"><path d="M4 10L8 6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </div>
       <div class="card-body">
         <p class="card-desc">One-sentence good or bad news about clients or team. No discussion &mdash; just the headline.</p>
@@ -721,49 +559,42 @@
         </div>
         <div class="hlist" id="c-hl">
           <div class="hitem"><div class="hico good"><div class="hico-dot"></div></div><div class="hmain"><div class="h-text">Chuck website going live within 48 hrs &mdash; all stock photos replaced with client photos</div><div class="h-tag">Good &middot; Chuck Kerschbaum</div></div></div>
-          <div class="hitem"><div class="hico good"><div class="hico-dot"></div></div><div class="hmain"><div class="h-text">AMK Properties review campaign launched on schedule this morning</div><div class="h-tag">Good &middot; AMK Properties</div></div></div>
-          <div class="hitem"><div class="hico good"><div class="hico-dot"></div></div><div class="hmain"><div class="h-text">Dennis Mitch referral booked &mdash; Capulet Realty deal in play (website + ads + Stripe)</div><div class="h-tag">Good &middot; New Lead</div></div></div>
-          <div class="hitem"><div class="hico bad"><div class="hico-dot"></div></div><div class="hmain"><div class="h-text">Samosa House GHL wallet hit max failed payments &mdash; campaigns at risk of going dark</div><div class="h-tag">Bad &middot; Samosa House</div></div></div>
-          <div class="hitem"><div class="hico bad"><div class="hico-dot"></div></div><div class="hmain"><div class="h-text">Chestnut Development GHL wallet also suspended &mdash; same issue, same fix needed</div><div class="h-tag">Bad &middot; Chestnut Development</div></div></div>
-          <div class="hitem"><div class="hico bad"><div class="hico-dot"></div></div><div class="hmain"><div class="h-text">Kerin at Aspire Ann Arbor waiting on lead capture setup instructions &mdash; no reply yet</div><div class="h-tag">Pending &middot; Aspire Ann Arbor</div></div></div>
-          <div class="hitem"><div class="hico action"><div class="hico-dot"></div></div><div class="hmain"><div class="h-text">9 new Google reviews across 6 client accounts this week &mdash; none responded to yet</div><div class="h-tag">Needs Action &middot; Multiple Clients</div></div></div>
+          <div class="hitem"><div class="hico good"><div class="hico-dot"></div></div><div class="hmain"><div class="h-text">Wendy&rsquo;s new GBP verified in 2 days &mdash; meeting held today, initial actions defined</div><div class="h-tag">Good &middot; Wendy Allen</div></div></div>
+          <div class="hitem"><div class="hico good"><div class="hico-dot"></div></div><div class="hmain"><div class="h-text">Brad Jordan confirmed July 1 &mdash; booked today, meeting link sent</div><div class="h-tag">Good &middot; Pipeline</div></div></div>
+          <div class="hitem"><div class="hico good"><div class="hico-dot"></div></div><div class="hmain"><div class="h-text">Dennis Mitch Referral (Capulet Realty) confirmed for tomorrow &mdash; website + ads + Stripe</div><div class="h-tag">Good &middot; New Lead</div></div></div>
+          <div class="hitem"><div class="hico bad"><div class="hico-dot"></div></div><div class="hmain"><div class="h-text">Samosa House + Chestnut Development GHL wallets suspended &mdash; campaigns at risk</div><div class="h-tag">Bad &middot; Samosa + Chestnut</div></div></div>
+          <div class="hitem"><div class="hico bad"><div class="hico-dot"></div></div><div class="hmain"><div class="h-text">Kerin at Aspire Ann Arbor still waiting on lead capture setup &mdash; no reply sent yet</div><div class="h-tag">Pending &middot; Aspire Ann Arbor</div></div></div>
+          <div class="hitem"><div class="hico action"><div class="hico-dot"></div></div><div class="hmain"><div class="h-text">2 new Google reviews today &mdash; Mary (Taco King) + Sophia (JMB Auto Sports) &mdash; unanswered</div><div class="h-tag">Needs Action &middot; Multiple Clients</div></div></div>
         </div>
         <div class="hlist" id="t-hl" style="display:none;">
           <div class="hitem"><div class="hico good"><div class="hico-dot"></div></div><div class="hmain"><div class="h-text">David managed Chuck pre-call brief and Google Drive access request successfully</div><div class="h-tag">Good &middot; David</div></div></div>
-          <div class="hitem"><div class="hico bad"><div class="hico-dot"></div></div><div class="hmain"><div class="h-text">Zapier Zap erroring for Holiday Heating &amp; Air Conditioning &mdash; needs fix this week</div><div class="h-tag">Bad &middot; Automation</div></div></div>
+          <div class="hitem"><div class="hico bad"><div class="hico-dot"></div></div><div class="hmain"><div class="h-text">New Zapier error today &mdash; Elite Landscapes LLC REP MGMT Zap (in addition to existing Holiday HVAC error)</div><div class="h-tag">Bad &middot; Automation</div></div></div>
           <div class="hitem"><div class="hico bad"><div class="hico-dot"></div></div><div class="hmain"><div class="h-text">GBP verification video rejected &mdash; Hayden needs to resubmit</div><div class="h-tag">Bad &middot; Hayden</div></div></div>
+          <div class="hitem"><div class="hico bad"><div class="hico-dot"></div></div><div class="hmain"><div class="h-text">Google Ads conversion tracking broken &mdash; currently firing on page load, not on actual conversions</div><div class="h-tag">Bad &middot; Ads</div></div></div>
         </div>
       </div>
     </div>
 
-    <!-- 5. To-Do List -->
-    <div class="card closed" id="card-4">
-      <div class="card-hd" onclick="toggleCard(4)">
-        <div class="card-hd-l">
-          <div class="num">5</div>
-          <span class="card-title">To-Do List</span>
-          <span class="tpill">5 min</span>
-        </div>
-        <div class="card-hd-r">
-          <span class="stimer" id="st-4">5:00</span>
-          <svg class="chevron" viewBox="0 0 16 16" fill="none"><path d="M4 10L8 6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
+    <!-- 6. To-Do (Hayden only) -->
+    <div class="card closed" id="card-5">
+      <div class="card-hd" onclick="toggleCard(5)">
+        <div class="card-hd-l"><div class="num">6</div><span class="card-title">To-Do List</span><span class="tpill">5 min</span></div>
+        <div class="card-hd-r"><span class="stimer" id="st-5">5:00</span><svg class="chevron" viewBox="0 0 16 16" fill="none"><path d="M4 10L8 6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </div>
       <div class="card-body">
-        <p class="card-desc">7-day action items. Were last week's to-dos completed? Set this week's commitments.</p>
+        <p class="card-desc">Hayden&rsquo;s 7-day action items. Were last week&rsquo;s to-dos completed? Set this week&rsquo;s commitments.</p>
         <div class="todos" id="todoList">
-          <div class="todo"><div class="tcb" onclick="toggleTodo(this)"><div class="tcb-check"></div></div><span class="todo-text">Manually recharge GHL wallet &mdash; Samosa House</span><span class="t-urgent">Urgent</span><span class="t-owner">Hayden</span></div>
-          <div class="todo"><div class="tcb" onclick="toggleTodo(this)"><div class="tcb-check"></div></div><span class="todo-text">Manually recharge GHL wallet &mdash; Chestnut Development</span><span class="t-urgent">Urgent</span><span class="t-owner">Hayden</span></div>
-          <div class="todo"><div class="tcb" onclick="toggleTodo(this)"><div class="tcb-check"></div></div><span class="todo-text">Reply to Kerin at Aspire Ann Arbor &mdash; explain lead capture setup</span><span class="t-owner">Hayden</span></div>
-          <div class="todo"><div class="tcb" onclick="toggleTodo(this)"><div class="tcb-check"></div></div><span class="todo-text">Fix Zapier error on Holiday Heating &amp; Air Conditioning</span><span class="t-owner">David</span></div>
-          <div class="todo"><div class="tcb" onclick="toggleTodo(this)"><div class="tcb-check"></div></div><span class="todo-text">Send Quinton invoice &mdash; full year (June included)</span><span class="t-owner">Hayden</span></div>
-          <div class="todo"><div class="tcb" onclick="toggleTodo(this)"><div class="tcb-check"></div></div><span class="todo-text">Respond to 9 pending Google reviews across all client GBP accounts</span><span class="t-owner">David</span></div>
-          <div class="todo"><div class="tcb" onclick="toggleTodo(this)"><div class="tcb-check"></div></div><span class="todo-text">Resubmit GBP verification video</span><span class="t-owner">Hayden</span></div>
-          <div class="todo"><div class="tcb" onclick="toggleTodo(this)"><div class="tcb-check"></div></div><span class="todo-text">Resolve Friday 2 PM double booking &mdash; reschedule Hayden Larance or Dennis</span><span class="t-owner">Hayden</span></div>
-          <div class="todo"><div class="tcb" onclick="toggleTodo(this)"><div class="tcb-check"></div></div><span class="todo-text">Jonas running ads for credit repair? &mdash; confirm, set up, or decline</span><span class="t-owner">Hayden</span></div>
-          <div class="todo"><div class="tcb" onclick="toggleTodo(this)"><div class="tcb-check"></div></div><span class="todo-text">Check ClickUp &mdash; escalated chat from Zapier alert (June 17)</span><span class="t-owner">David</span></div>
-          <div class="todo"><div class="tcb" onclick="toggleTodo(this)"><div class="tcb-check"></div></div><span class="todo-text">Confirm Chuck accepted Google Drive access request for photos</span><span class="t-owner">David</span></div>
-          <div class="todo"><div class="tcb" onclick="toggleTodo(this)"><div class="tcb-check"></div></div><span class="todo-text">Batch 20&ndash;30 outreach messages sent this week</span><span class="t-owner">Hayden</span></div>
+          <div class="todo"><div class="tcb" onclick="toggleTodo(this)"><div class="tcb-check"></div></div><span class="todo-text">Manually recharge GHL wallet &mdash; Samosa House</span><span class="t-urgent">Urgent</span></div>
+          <div class="todo"><div class="tcb" onclick="toggleTodo(this)"><div class="tcb-check"></div></div><span class="todo-text">Manually recharge GHL wallet &mdash; Chestnut Development</span><span class="t-urgent">Urgent</span></div>
+          <div class="todo"><div class="tcb" onclick="toggleTodo(this)"><div class="tcb-check"></div></div><span class="todo-text">Reply to Momence unread message &mdash; new lead waiting</span><span class="t-new">New Today</span></div>
+          <div class="todo"><div class="tcb" onclick="toggleTodo(this)"><div class="tcb-check"></div></div><span class="todo-text">Reply to Kerin at Aspire Ann Arbor &mdash; explain lead capture setup</span></div>
+          <div class="todo"><div class="tcb" onclick="toggleTodo(this)"><div class="tcb-check"></div></div><span class="todo-text">Send Quinton invoice &mdash; full year (June included) &mdash; Fri 8 AM reminder set</span></div>
+          <div class="todo"><div class="tcb" onclick="toggleTodo(this)"><div class="tcb-check"></div></div><span class="todo-text">Resolve Fri 2 PM double booking &mdash; Hayden Larance call vs. Dennis Mitch Referral</span></div>
+          <div class="todo"><div class="tcb" onclick="toggleTodo(this)"><div class="tcb-check"></div></div><span class="todo-text">Resubmit GBP verification video</span></div>
+          <div class="todo"><div class="tcb" onclick="toggleTodo(this)"><div class="tcb-check"></div></div><span class="todo-text">Jonas credit repair ads &mdash; confirm, set up, or decline</span></div>
+          <div class="todo"><div class="tcb" onclick="toggleTodo(this)"><div class="tcb-check"></div></div><span class="todo-text">Let Jonas know about website pages (Fri 7 PM)</span></div>
+          <div class="todo"><div class="tcb" onclick="toggleTodo(this)"><div class="tcb-check"></div></div><span class="todo-text">Batch 20&ndash;30 outreach messages this week</span></div>
+          <div class="todo"><div class="tcb" onclick="toggleTodo(this)"><div class="tcb-check"></div></div><span class="todo-text">Fix Google Ads conversion tracking &mdash; currently fires on page load not conversion</span></div>
         </div>
         <div class="addrow">
           <input class="addinput" id="todoInput" placeholder="Add a to-do..." />
@@ -772,18 +603,11 @@
       </div>
     </div>
 
-    <!-- 6. IDS -->
-    <div class="card closed" id="card-5">
-      <div class="card-hd" onclick="toggleCard(5)">
-        <div class="card-hd-l">
-          <div class="num">6</div>
-          <span class="card-title">IDS</span>
-          <span class="tpill">60 min</span>
-        </div>
-        <div class="card-hd-r">
-          <span class="stimer" id="st-5">60:00</span>
-          <svg class="chevron" viewBox="0 0 16 16" fill="none"><path d="M4 10L8 6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
+    <!-- 7. IDS -->
+    <div class="card closed" id="card-6">
+      <div class="card-hd" onclick="toggleCard(6)">
+        <div class="card-hd-l"><div class="num">7</div><span class="card-title">IDS</span><span class="tpill">60 min</span></div>
+        <div class="card-hd-r"><span class="stimer" id="st-6">60:00</span><svg class="chevron" viewBox="0 0 16 16" fill="none"><path d="M4 10L8 6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </div>
       <div class="card-body">
         <div class="ids-grid">
@@ -792,13 +616,12 @@
           <div class="ids-box"><div class="ids-letter">S</div><div class="ids-word">Solve</div><div class="ids-hint">Agree on solution. Assign a clear owner.</div></div>
         </div>
         <div class="issues" id="issuesList">
-          <div class="issue live" onclick="toggleIssue(this)"><div class="idot" style="background:#dc2626;"></div><span class="i-text">2 client GHL wallets suspended &mdash; recurring payment failure pattern needs systemic fix</span><span class="i-tag">Samosa + Chestnut</span><span class="i-status">Discussing</span></div>
-          <div class="issue" onclick="toggleIssue(this)"><div class="idot" style="background:#dc2626;"></div><span class="i-text">Monthly revenue significantly behind &mdash; identify gap and close pipeline faster</span><span class="i-tag">Business</span><span class="i-status">Queued</span></div>
-          <div class="issue" onclick="toggleIssue(this)"><div class="idot" style="background:#f59e0b;"></div><span class="i-text">Sales calls per week too low &mdash; outreach volume not converting to booked calls</span><span class="i-tag">Pipeline</span><span class="i-status">Queued</span></div>
-          <div class="issue" onclick="toggleIssue(this)"><div class="idot" style="background:#f59e0b;"></div><span class="i-text">No process for responding to client GBP reviews &mdash; 9 unanswered this week alone</span><span class="i-tag">Operations</span><span class="i-status">Queued</span></div>
-          <div class="issue" onclick="toggleIssue(this)"><div class="idot" style="background:#f59e0b;"></div><span class="i-text">Zapier automations erroring with no monitoring or alerting system in place</span><span class="i-tag">Holiday HVAC</span><span class="i-status">Queued</span></div>
-          <div class="issue" onclick="toggleIssue(this)"><div class="idot" style="background:#9ca3af;"></div><span class="i-text">Jonas credit repair ads &mdash; need a decision: run, delay, or decline</span><span class="i-tag">Jonas</span><span class="i-status">Queued</span></div>
-          <div class="issue" onclick="toggleIssue(this)"><div class="idot" style="background:#9ca3af;"></div><span class="i-text">CSM hiring not started &mdash; 0 candidates despite Rock being set this quarter</span><span class="i-tag">Hiring</span><span class="i-status">Queued</span></div>
+          <div class="issue live" onclick="toggleIssue(this)"><div class="idot" style="background:#dc2626;"></div><span class="i-text">2 client GHL wallets suspended &mdash; recurring payment failure needs a systemic fix</span><span class="i-tag">Samosa + Chestnut</span><span class="i-status">Discussing</span></div>
+          <div class="issue" onclick="toggleIssue(this)"><div class="idot" style="background:#f59e0b;"></div><span class="i-text">Sales calls per week too low &mdash; outreach not converting to booked calls</span><span class="i-tag">Pipeline</span><span class="i-status">Queued</span></div>
+          <div class="issue" onclick="toggleIssue(this)"><div class="idot" style="background:#f59e0b;"></div><span class="i-text">No process for responding to client GBP reviews &mdash; 9 unanswered this week</span><span class="i-tag">Operations</span><span class="i-status">Queued</span></div>
+          <div class="issue" onclick="toggleIssue(this)"><div class="idot" style="background:#f59e0b;"></div><span class="i-text">Zapier automations erroring with no monitoring system &mdash; now 2 active errors</span><span class="i-tag">Automation</span><span class="i-status">Queued</span></div>
+          <div class="issue" onclick="toggleIssue(this)"><div class="idot" style="background:#f59e0b;"></div><span class="i-text">Google Ads conversion tracking broken &mdash; firing on page load, not actual leads</span><span class="i-tag">Ads</span><span class="i-status">Queued</span></div>
+          <div class="issue" onclick="toggleIssue(this)"><div class="idot" style="background:#9ca3af;"></div><span class="i-text">CSM hiring not started &mdash; 0 candidates in pipeline despite Rock being set Q2</span><span class="i-tag">Hiring</span><span class="i-status">Queued</span></div>
         </div>
         <div class="addrow">
           <input class="addinput" id="issueInput" placeholder="Add an issue to solve..." />
@@ -807,44 +630,26 @@
       </div>
     </div>
 
-    <!-- 7. Conclude -->
-    <div class="card closed" id="card-6">
-      <div class="card-hd" onclick="toggleCard(6)">
-        <div class="card-hd-l">
-          <div class="num">7</div>
-          <span class="card-title">Conclude</span>
-          <span class="tpill">5 min</span>
-        </div>
-        <div class="card-hd-r">
-          <span class="stimer" id="st-6">5:00</span>
-          <svg class="chevron" viewBox="0 0 16 16" fill="none"><path d="M4 10L8 6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
+    <!-- 8. Conclude -->
+    <div class="card closed" id="card-7">
+      <div class="card-hd" onclick="toggleCard(7)">
+        <div class="card-hd-l"><div class="num">8</div><span class="card-title">Conclude</span><span class="tpill">5 min</span></div>
+        <div class="card-hd-r"><span class="stimer" id="st-7">5:00</span><svg class="chevron" viewBox="0 0 16 16" fill="none"><path d="M4 10L8 6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </div>
       <div class="card-body">
         <div class="conclude-grid">
-          <div class="cbox">
-            <div class="cbox-label">This Week's Action Items</div>
-            <textarea class="cbox-ta" placeholder="List to-dos with owners and due dates..."></textarea>
-          </div>
-          <div class="cbox">
-            <div class="cbox-label">Cascade Messages</div>
-            <textarea class="cbox-ta" placeholder="What does the rest of the team need to know?"></textarea>
-          </div>
+          <div class="cbox"><div class="cbox-label">This Week&rsquo;s Action Items</div><textarea class="cbox-ta" placeholder="List to-dos with owners and due dates..."></textarea></div>
+          <div class="cbox"><div class="cbox-label">Cascade Messages</div><textarea class="cbox-ta" placeholder="What does the rest of the team need to know?"></textarea></div>
         </div>
         <div class="cbox" style="margin-top:0;">
           <div class="cbox-label">Meeting Rating &mdash; How was this Level 10?</div>
           <div class="rating-row" id="ratingRow">
             <span class="rating-lbl">Score:</span>
-            <button class="rbtn" onclick="rate(this)">1</button>
-            <button class="rbtn" onclick="rate(this)">2</button>
-            <button class="rbtn" onclick="rate(this)">3</button>
-            <button class="rbtn" onclick="rate(this)">4</button>
-            <button class="rbtn" onclick="rate(this)">5</button>
-            <button class="rbtn" onclick="rate(this)">6</button>
-            <button class="rbtn" onclick="rate(this)">7</button>
-            <button class="rbtn" onclick="rate(this)">8</button>
-            <button class="rbtn" onclick="rate(this)">9</button>
-            <button class="rbtn" onclick="rate(this)">10</button>
+            <button class="rbtn" onclick="rate(this)">1</button><button class="rbtn" onclick="rate(this)">2</button>
+            <button class="rbtn" onclick="rate(this)">3</button><button class="rbtn" onclick="rate(this)">4</button>
+            <button class="rbtn" onclick="rate(this)">5</button><button class="rbtn" onclick="rate(this)">6</button>
+            <button class="rbtn" onclick="rate(this)">7</button><button class="rbtn" onclick="rate(this)">8</button>
+            <button class="rbtn" onclick="rate(this)">9</button><button class="rbtn" onclick="rate(this)">10</button>
           </div>
         </div>
       </div>
@@ -855,13 +660,25 @@
   <script>
     const SECTIONS = [
       { label:'Segue', mins:5 }, { label:'Scorecard', mins:5 },
-      { label:'Rock Review', mins:5 }, { label:'Headlines', mins:5 },
-      { label:'To-Do', mins:5 }, { label:'IDS', mins:60 }, { label:'Conclude', mins:5 },
+      { label:'Tracker', mins:5 }, { label:'Rock Review', mins:5 },
+      { label:'Headlines', mins:5 }, { label:'To-Do', mins:5 },
+      { label:'IDS', mins:60 }, { label:'Conclude', mins:5 },
     ];
 
     // Set date
-    document.getElementById('topDate').textContent = new Date().toLocaleDateString('en-US', { weekday:'short', month:'long', day:'numeric' });
+    const now = new Date();
+    document.getElementById('topDate').textContent = now.toLocaleDateString('en-US', { weekday:'short', month:'long', day:'numeric' });
+    document.getElementById('briefDate').textContent = now.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric' }) + ' · Here’s what matters today';
 
+    // Brief collapse
+    let briefOpen = true;
+    function toggleBrief() {
+      briefOpen = !briefOpen;
+      document.getElementById('briefBody').style.display = briefOpen ? 'block' : 'none';
+      document.querySelector('.brief-collapse').textContent = briefOpen ? 'Collapse' : 'Expand';
+    }
+
+    // Meeting timer
     let running = false, gSecs = 0, curSec = 0, secSecs = 300;
     let gInt = null, sInt = null;
 
@@ -871,50 +688,41 @@
       if (running) {
         btn.innerHTML = '<div class="btn-dot"></div>End Meeting';
         btn.classList.add('stop');
-        document.getElementById('liveBadge').classList.add('visible');
+        document.getElementById('liveBadge').classList.add('on');
         gInt = setInterval(() => { gSecs++; document.getElementById('gTimer').textContent = fmt(gSecs); }, 1000);
         activateSection(0);
       } else {
         btn.innerHTML = '<div class="btn-dot"></div>Start Meeting';
         btn.classList.remove('stop');
-        document.getElementById('liveBadge').classList.remove('visible');
+        document.getElementById('liveBadge').classList.remove('on');
         clearInterval(gInt); clearInterval(sInt);
       }
     }
 
     function activateSection(i) {
       clearInterval(sInt);
-      document.querySelectorAll('.ps').forEach((el,j) => { el.classList.toggle('done', j<i); el.classList.toggle('live', j===i); });
-      document.querySelectorAll('.pn').forEach((el,j) => { el.classList.toggle('done', j<i); el.classList.toggle('live', j===i); });
+      document.querySelectorAll('.ps').forEach((el,j) => { el.classList.toggle('done',j<i); el.classList.toggle('live',j===i); });
+      document.querySelectorAll('.pn').forEach((el,j) => { el.classList.toggle('done',j<i); el.classList.toggle('live',j===i); });
       document.getElementById('progCur').textContent = `${i+1} of ${SECTIONS.length} — ${SECTIONS[i].label}`;
-      document.querySelectorAll('.card').forEach((c,j) => { c.classList.toggle('on', j===i); if (j===i) c.classList.remove('closed'); });
-      curSec = i;
-      secSecs = SECTIONS[i].mins * 60;
+      document.querySelectorAll('.card').forEach((c,j) => { c.classList.toggle('on',j===i); if(j===i) c.classList.remove('closed'); });
+      curSec = i; secSecs = SECTIONS[i].mins * 60;
       refreshTimer();
-      sInt = setInterval(() => {
-        secSecs--;
-        refreshTimer();
-        if (secSecs <= 0) { clearInterval(sInt); const el = document.getElementById(`st-${curSec}`); if (el) el.textContent = 'Time!'; }
-      }, 1000);
+      sInt = setInterval(() => { secSecs--; refreshTimer(); if(secSecs<=0){ clearInterval(sInt); const el=document.getElementById(`st-${curSec}`); if(el) el.textContent='Time!'; } }, 1000);
     }
 
-    function refreshTimer() { const el = document.getElementById(`st-${curSec}`); if (el) el.textContent = fmt(secSecs); }
-    function fmt(s) { const m = Math.floor(Math.abs(s)/60), sec = Math.abs(s)%60; return `${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`; }
+    function refreshTimer() { const el = document.getElementById(`st-${curSec}`); if(el) el.textContent = fmt(secSecs); }
+    function fmt(s) { const m=Math.floor(Math.abs(s)/60), sec=Math.abs(s)%60; return `${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`; }
 
     function toggleCard(i) {
       const c = document.getElementById(`card-${i}`);
       c.classList.toggle('closed');
-      if (running && !c.classList.contains('closed')) activateSection(i);
+      if(running && !c.classList.contains('closed')) activateSection(i);
     }
 
     function cycleRock(el) {
-      if (el.classList.contains('off')) {
-        el.classList.replace('off', 'on');
-      } else if (el.classList.contains('on')) {
-        el.classList.replace('on', 'done');
-      } else {
-        el.classList.replace('done', 'off');
-      }
+      if(el.classList.contains('off')) el.classList.replace('off','on');
+      else if(el.classList.contains('on')) el.classList.replace('on','done');
+      else el.classList.replace('done','off');
     }
 
     function toggleTodo(el) {
@@ -924,41 +732,123 @@
 
     function addTodo() {
       const inp = document.getElementById('todoInput');
-      const v = inp.value.trim(); if (!v) return;
+      const v = inp.value.trim(); if(!v) return;
       const d = document.createElement('div'); d.className = 'todo';
-      d.innerHTML = `<div class="tcb" onclick="toggleTodo(this)"><div class="tcb-check"></div></div><span class="todo-text">${v}</span><span class="t-owner">Hayden</span>`;
+      d.innerHTML = `<div class="tcb" onclick="toggleTodo(this)"><div class="tcb-check"></div></div><span class="todo-text">${v}</span>`;
       document.getElementById('todoList').appendChild(d);
       inp.value = '';
     }
-    document.getElementById('todoInput').addEventListener('keydown', e => { if (e.key === 'Enter') addTodo(); });
+    document.getElementById('todoInput').addEventListener('keydown', e => { if(e.key==='Enter') addTodo(); });
 
     function addIssue() {
       const inp = document.getElementById('issueInput');
-      const v = inp.value.trim(); if (!v) return;
+      const v = inp.value.trim(); if(!v) return;
       const d = document.createElement('div'); d.className = 'issue'; d.setAttribute('onclick','toggleIssue(this)');
       d.innerHTML = `<div class="idot" style="background:#9ca3af;"></div><span class="i-text">${v}</span><span class="i-tag">New</span><span class="i-status">Queued</span>`;
       document.getElementById('issuesList').appendChild(d);
       inp.value = '';
     }
-    document.getElementById('issueInput').addEventListener('keydown', e => { if (e.key === 'Enter') addIssue(); });
+    document.getElementById('issueInput').addEventListener('keydown', e => { if(e.key==='Enter') addIssue(); });
 
     function toggleIssue(el) {
-      const wasLive = el.classList.contains('live');
+      const was = el.classList.contains('live');
       document.querySelectorAll('.issue').forEach(i => { i.classList.remove('live'); i.querySelector('.i-status').textContent = 'Queued'; });
-      if (!wasLive) { el.classList.add('live'); el.querySelector('.i-status').textContent = 'Discussing'; }
+      if(!was){ el.classList.add('live'); el.querySelector('.i-status').textContent = 'Discussing'; }
     }
 
     function switchHTab(el, type) {
       document.querySelectorAll('.htab').forEach(t => t.classList.remove('on'));
       el.classList.add('on');
-      document.getElementById('c-hl').style.display = type === 'c' ? 'flex' : 'none';
-      document.getElementById('t-hl').style.display = type === 't' ? 'flex' : 'none';
+      document.getElementById('c-hl').style.display = type==='c' ? 'flex' : 'none';
+      document.getElementById('t-hl').style.display = type==='t' ? 'flex' : 'none';
     }
 
     function rate(el) {
       document.querySelectorAll('#ratingRow .rbtn').forEach(b => b.classList.remove('on'));
       el.classList.add('on');
     }
+
+    // ── Google Sheets Integration ─────────────────────
+    function connectSheet() {
+      const url = document.getElementById('sheetUrlInput').value.trim();
+      if(!url) return;
+      localStorage.setItem('sheetUrl', url);
+      refreshSheet();
+    }
+
+    async function refreshSheet() {
+      const url = localStorage.getItem('sheetUrl');
+      if(!url) return;
+
+      document.getElementById('sheetStatus').textContent = 'Loading...';
+      document.getElementById('sheetStatus').className = 'sheet-status none';
+
+      try {
+        const resp = await fetch(url);
+        if(!resp.ok) throw new Error('HTTP ' + resp.status);
+        const csv = await resp.text();
+
+        // Parse CSV rows
+        const rows = csv.split('\n').map(r =>
+          r.split(',').map(c => c.trim().replace(/^"|"$/g, ''))
+        );
+
+        let meetingsVal = null, cashVal = null;
+
+        for(const row of rows) {
+          const label = (row[0] || '').toLowerCase();
+          // Find numeric value — check columns 1 through end
+          const findNum = () => {
+            for(let i = 1; i < row.length; i++) {
+              const cleaned = row[i].replace(/[$,\s]/g,'');
+              if(cleaned && !isNaN(parseFloat(cleaned))) return row[i];
+            }
+            return null;
+          };
+
+          if(label.includes('meeting') && meetingsVal === null) meetingsVal = findNum();
+          if((label.includes('cash') || label.includes('collected')) && cashVal === null) cashVal = findNum();
+        }
+
+        if(meetingsVal !== null) {
+          document.getElementById('meetingsVal').textContent = meetingsVal;
+          document.getElementById('meetingsVal').classList.remove('loading');
+          const n = parseFloat(meetingsVal);
+          const sub = document.getElementById('meetingsSub');
+          if(n >= 10){ sub.textContent = 'On target'; sub.className = 'tkpi-sub good'; }
+          else if(n >= 6){ sub.textContent = `${10-n} to target`; sub.className = 'tkpi-sub mid'; }
+          else { sub.textContent = `${10-n} to target — behind`; sub.className = 'tkpi-sub bad'; }
+        }
+
+        if(cashVal !== null) {
+          document.getElementById('cashVal').textContent = cashVal;
+          document.getElementById('cashVal').classList.remove('loading');
+          const n = parseFloat(cashVal.replace(/[$,]/g,''));
+          const sub = document.getElementById('cashSub');
+          if(n >= 3000){ sub.textContent = 'On target'; sub.className = 'tkpi-sub good'; }
+          else if(n >= 1500){ sub.textContent = `$${(3000-n).toFixed(0)} to target`; sub.className = 'tkpi-sub mid'; }
+          else { sub.textContent = `$${(3000-n).toFixed(0)} to target — behind`; sub.className = 'tkpi-sub bad'; }
+        }
+
+        document.getElementById('sheetStatus').textContent = 'Connected — last updated ' + new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+        document.getElementById('sheetStatus').className = 'sheet-status ok';
+        document.getElementById('sheetRefresh').style.display = 'inline';
+        document.getElementById('sheetUrlInput').value = url;
+
+      } catch(e) {
+        document.getElementById('sheetStatus').textContent = 'Could not load — check the URL and that the sheet is published publicly';
+        document.getElementById('sheetStatus').className = 'sheet-status err';
+      }
+    }
+
+    // Auto-load sheet on page open if previously connected
+    window.addEventListener('load', () => {
+      const saved = localStorage.getItem('sheetUrl');
+      if(saved) {
+        document.getElementById('sheetUrlInput').value = saved;
+        refreshSheet();
+      }
+    });
   </script>
 </body>
 </html>
