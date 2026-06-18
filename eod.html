@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>End of Day — Amistad Digital</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f5f5f3; --surface: #fff; --border: #e8e8e5;
+      --text: #111; --muted: #888; --faint: #c0c0bc;
+      --accent: #4f46e5; --accent-bg: #eef2ff;
+      --green: #16a34a; --green-bg: #dcfce7;
+      --red: #dc2626; --red-bg: #fee2e2;
+      --amber: #b45309; --amber-bg: #fef3c7;
+      --r: 12px; --sh: 0 1px 3px rgba(0,0,0,0.07);
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+
+    .topbar { background: #0a0a0a; height: 52px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; position: sticky; top: 0; z-index: 200; }
+    .brand { display: flex; align-items: center; gap: 9px; color: #fff; font-size: 13px; font-weight: 700; }
+    .brand-icon { width: 27px; height: 27px; background: var(--accent); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; color: #fff; }
+    .topbar-right { display: flex; align-items: center; gap: 8px; }
+    .topbar-date { font-size: 12px; color: #555; }
+
+    .page-nav { background: #0a0a0a; border-top: 1px solid rgba(255,255,255,.06); display: flex; padding: 0 24px; overflow-x: auto; position: sticky; top: 52px; z-index: 100; }
+    .page-nav::-webkit-scrollbar { display: none; }
+    .pn-tab { padding: 10px 14px; font-size: 12px; font-weight: 600; color: #555; white-space: nowrap; cursor: pointer; border-bottom: 2px solid transparent; transition: color .15s, border-color .15s; text-decoration: none; display: block; }
+    .pn-tab:hover { color: #bbb; }
+    .pn-tab.on { color: #fff; border-bottom-color: var(--accent); }
+
+    .main { max-width: 860px; margin: 0 auto; padding: 28px 24px 80px; }
+
+    /* Hero */
+    .hero { background: #0a0a0a; border-radius: 16px; padding: 28px; margin-bottom: 22px; color: #fff; }
+    .hero-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 10px; }
+    .hero-heading { font-size: 26px; font-weight: 800; letter-spacing: -.04em; }
+    .hero-sub { font-size: 13px; color: #555; margin-top: 4px; }
+    .wins-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    @media (max-width: 640px) { .wins-grid { grid-template-columns: 1fr 1fr; } }
+    .win-tile { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); border-radius: 10px; padding: 14px 16px; }
+    .win-tile.green { border-color: rgba(74,222,128,.2); background: rgba(74,222,128,.06); }
+    .win-tile.amber { border-color: rgba(251,191,36,.2); background: rgba(251,191,36,.05); }
+    .win-lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #444; margin-bottom: 8px; }
+    .win-tile.green .win-lbl { color: #4ade80; }
+    .win-tile.amber .win-lbl { color: #fbbf24; }
+    .win-val { font-size: 22px; font-weight: 800; letter-spacing: -.03em; color: #fff; }
+    .win-val.green { color: #4ade80; }
+    .win-val.amber { color: #fbbf24; }
+    .win-sub { font-size: 11px; color: #555; margin-top: 5px; line-height: 1.5; }
+    .win-input { background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,.1); color: #fff; font-size: 22px; font-weight: 800; letter-spacing: -.03em; width: 100%; outline: none; padding: 0; font-family: inherit; }
+    .win-input::placeholder { color: #333; font-weight: 400; font-size: 16px; letter-spacing: 0; }
+    .win-input:focus { border-bottom-color: rgba(79,70,229,.6); }
+
+    /* Section */
+    .sec-hd { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; margin-top: 28px; }
+    .sec-title { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+    .sec-count { font-size: 11px; font-weight: 700; background: var(--red-bg); color: var(--red); padding: 2px 8px; border-radius: 100px; }
+
+    /* Activity inputs */
+    .activity-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    @media (max-width: 600px) { .activity-grid { grid-template-columns: 1fr 1fr; } }
+    .act-tile { background: var(--surface); border: 1px solid var(--border); border-radius: 11px; padding: 16px 18px; box-shadow: var(--sh); }
+    .act-lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 8px; }
+    .act-input { background: transparent; border: none; border-bottom: 2px solid var(--border); color: #111; font-size: 28px; font-weight: 800; letter-spacing: -.03em; width: 100%; outline: none; padding: 0 0 4px; font-family: inherit; font-variant-numeric: tabular-nums; transition: border-color .15s; }
+    .act-input:focus { border-bottom-color: var(--accent); }
+    .act-input::placeholder { color: var(--faint); font-weight: 400; font-size: 18px; letter-spacing: 0; }
+    .act-hint { font-size: 11px; color: var(--muted); margin-top: 5px; }
+
+    /* Email triage */
+    .email-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); margin-bottom: 10px; box-shadow: var(--sh); overflow: hidden; }
+    .email-hd { padding: 14px 18px 12px; }
+    .email-from { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-bottom: 4px; }
+    .email-subject { font-size: 14px; font-weight: 700; color: #111; margin-bottom: 6px; }
+    .email-snippet { font-size: 13px; color: #555; line-height: 1.6; }
+    .email-draft { background: var(--bg); border-top: 1px solid var(--border); padding: 14px 18px; }
+    .email-draft-lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+    .draft-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+    .draft-ta { width: 100%; background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 13px; font-size: 13px; font-family: inherit; color: #333; resize: vertical; min-height: 80px; outline: none; line-height: 1.6; transition: border-color .15s; }
+    .draft-ta:focus { border-color: var(--accent); }
+    .email-actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+    .btn-copy { background: var(--accent); color: #fff; border: none; border-radius: 7px; padding: 7px 16px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: inherit; transition: opacity .15s, background .15s; }
+    .btn-copy:hover { opacity: .85; }
+    .btn-copy.copied { background: var(--green); }
+    .btn-gmail { background: #fff; color: #555; border: 1px solid var(--border); border-radius: 7px; padding: 7px 14px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all .15s; text-decoration: none; display: inline-flex; align-items: center; }
+    .btn-gmail:hover { border-color: #999; color: #111; }
+
+    /* Todos */
+    .todos { display: flex; flex-direction: column; gap: 6px; }
+    .todo { display: flex; align-items: center; gap: 9px; padding: 10px 13px; background: var(--surface); border: 1px solid var(--border); border-radius: 9px; box-shadow: var(--sh); transition: opacity .2s; }
+    .todo.done { opacity: .38; }
+    .tcb { width: 17px; height: 17px; border-radius: 4px; border: 2px solid var(--border); background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: all .15s; }
+    .tcb.on { background: #111; border-color: #111; }
+    .tcb-check { width: 4px; height: 7px; border-right: 2px solid transparent; border-bottom: 2px solid transparent; transform: rotate(45deg) translate(-1px,-1px); }
+    .tcb.on .tcb-check { border-color: #fff; }
+    .todo-text { font-size: 13px; font-weight: 500; flex: 1; }
+    .todo.done .todo-text { text-decoration: line-through; }
+    .tag-urgent { font-size: 10px; font-weight: 700; background: var(--red-bg); color: var(--red); padding: 2px 8px; border-radius: 100px; white-space: nowrap; flex-shrink: 0; }
+    .tag-tmrw { font-size: 10px; font-weight: 700; background: var(--amber-bg); color: var(--amber); padding: 2px 8px; border-radius: 100px; white-space: nowrap; flex-shrink: 0; }
+
+    .addrow { display: flex; gap: 7px; margin-top: 8px; }
+    .addinput { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 7px; padding: 8px 11px; font-size: 13px; font-family: inherit; outline: none; color: #111; transition: border-color .15s; }
+    .addinput:focus { border-color: #999; background: #fff; }
+    .addinput::placeholder { color: var(--faint); }
+    .addbtn { background: #111; color: #fff; border: none; border-radius: 7px; padding: 8px 14px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: inherit; }
+    .addbtn:hover { background: #333; }
+
+    /* Bottleneck suggestions */
+    .bn-list { display: flex; flex-direction: column; gap: 8px; }
+    .bn-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; box-shadow: var(--sh); display: flex; align-items: flex-start; gap: 12px; }
+    .bn-num { width: 24px; height: 24px; border-radius: 50%; background: #111; color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .bn-body { flex: 1; }
+    .bn-title { font-size: 13px; font-weight: 700; color: #111; margin-bottom: 3px; }
+    .bn-why { font-size: 12px; color: #555; line-height: 1.6; }
+    .bn-tag { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 100px; margin-top: 6px; display: inline-block; }
+    .bn-tag.high { background: var(--red-bg); color: var(--red); }
+    .bn-tag.med { background: var(--amber-bg); color: var(--amber); }
+    .bn-tag.low { background: #f3f4f6; color: #555; }
+
+    /* Notes */
+    .note-area { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 14px 16px; font-size: 13px; color: #333; font-family: inherit; resize: vertical; min-height: 90px; outline: none; transition: border-color .15s; box-shadow: var(--sh); }
+    .note-area::placeholder { color: var(--faint); }
+    .note-area:focus { border-color: #aaa; }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand"><div class="brand-icon">AD</div>Amistad Digital</div>
+    <div class="topbar-right"><span class="topbar-date" id="topDate"></span></div>
+  </header>
+
+  <nav class="page-nav">
+    <a class="pn-tab" href="morning.html">Morning Briefing</a>
+    <a class="pn-tab" href="index.html">Level 10</a>
+    <a class="pn-tab on" href="eod.html">End of Day</a>
+  </nav>
+
+  <main class="main">
+
+    <!-- Hero: Today's wins -->
+    <div class="hero">
+      <div class="hero-top">
+        <div>
+          <div class="hero-heading" id="heroHeading">Closing out today</div>
+          <div class="hero-sub" id="heroDate">Let's see what you moved.</div>
+        </div>
+      </div>
+      <div class="wins-grid">
+        <div class="win-tile green">
+          <div class="win-lbl">Closes Today</div>
+          <input class="win-input" id="closesInput" placeholder="0" value="1" />
+          <div class="win-sub">Brad Jordan &mdash; confirmed, starts Jul 1</div>
+        </div>
+        <div class="win-tile green">
+          <div class="win-lbl">Meetings Booked</div>
+          <input class="win-input" id="bookingsInput" placeholder="0" value="1" />
+          <div class="win-sub">Brad Jordan &mdash; Jul 1, 1:30 PM</div>
+        </div>
+        <div class="win-tile amber">
+          <div class="win-lbl">Cash Collected</div>
+          <input class="win-input" id="cashInput" placeholder="$0" value="$331.82" />
+          <div class="win-sub">$237.93 Stripe · $93.89 Skool</div>
+        </div>
+        <div class="win-tile">
+          <div class="win-lbl">Outreach Sent</div>
+          <input class="win-input" id="outreachInput" placeholder="0" value="" />
+          <div class="win-sub">Target: 40/week</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Activity Inputs -->
+    <div class="sec-hd"><span class="sec-title">Today&rsquo;s Inputs</span></div>
+    <div class="activity-grid">
+      <div class="act-tile">
+        <div class="act-lbl">Sales Calls</div>
+        <input class="act-input" placeholder="0" type="number" min="0" />
+        <div class="act-hint">Target: 10/week</div>
+      </div>
+      <div class="act-tile">
+        <div class="act-lbl">Outreach Messages</div>
+        <input class="act-input" placeholder="0" type="number" min="0" />
+        <div class="act-hint">Target: 40/week</div>
+      </div>
+      <div class="act-tile">
+        <div class="act-lbl">Follow-ups Sent</div>
+        <input class="act-input" placeholder="0" type="number" min="0" />
+        <div class="act-hint">Prospects + clients</div>
+      </div>
+      <div class="act-tile">
+        <div class="act-lbl">Client Calls</div>
+        <input class="act-input" placeholder="0" type="number" min="0" />
+        <div class="act-hint">Active accounts</div>
+      </div>
+      <div class="act-tile">
+        <div class="act-lbl">Tasks Completed</div>
+        <input class="act-input" placeholder="0" type="number" min="0" />
+        <div class="act-hint">From today's list</div>
+      </div>
+      <div class="act-tile">
+        <div class="act-lbl">New Leads In</div>
+        <input class="act-input" placeholder="0" type="number" min="0" />
+        <div class="act-hint">Inbound + outbound</div>
+      </div>
+    </div>
+
+    <!-- EOD Email Triage -->
+    <div class="sec-hd">
+      <span class="sec-title">EOD Inbox Triage</span>
+      <span class="sec-count">3 need a reply</span>
+    </div>
+
+    <div class="email-card">
+      <div class="email-hd">
+        <div class="email-from">Google Reviews &middot; Taco King + JMB Auto Sports</div>
+        <div class="email-subject">2 new Google reviews &mdash; respond before end of day</div>
+        <div class="email-snippet">Mary left a review for Taco King and Sophia left a review for JMB Auto Sports. Client review response rate is currently 0/9 this week. Respond now to close that gap.</div>
+      </div>
+      <div class="email-draft">
+        <div class="email-draft-lbl"><div class="draft-dot"></div>Drafted Response &mdash; Taco King (Mary)</div>
+        <textarea class="draft-ta" id="draft-0">Thank you so much for the kind review, Mary! We really appreciate you taking the time to share your experience. It means a lot to us and we hope to see you again soon!</textarea>
+        <div class="email-actions">
+          <button class="btn-copy" onclick="copyDraft(0, this)">Copy Response</button>
+          <a class="btn-gmail" href="https://business.google.com/reviews" target="_blank">Open Google Reviews</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-hd">
+        <div class="email-from">Brad Jordan &mdash; New Client Confirmation</div>
+        <div class="email-subject">Send thank-you + onboarding next steps</div>
+        <div class="email-snippet">Brad Jordan confirmed today and starts July 1. Send a thank-you email now with onboarding next steps to set the right tone before he starts.</div>
+      </div>
+      <div class="email-draft">
+        <div class="email-draft-lbl"><div class="draft-dot"></div>Drafted Reply</div>
+        <textarea class="draft-ta" id="draft-1">Hi Brad,
+
+So excited to have you onboard! We're going to do great work together.
+
+Here's what happens next:
+1. I'll send over your onboarding intake form in the next 24 hours
+2. We'll have our kickoff call on July 1 at 1:30 PM (calendar invite coming shortly)
+3. We'll have your first campaign live within the first week
+
+If you have any questions before then, don't hesitate to reach out.
+
+Talk soon,
+Hayden
+Amistad Digital</textarea>
+        <div class="email-actions">
+          <button class="btn-copy" onclick="copyDraft(1, this)">Copy Reply</button>
+          <a class="btn-gmail" href="https://mail.google.com/mail/u/0/#inbox" target="_blank">Open Gmail</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-hd">
+        <div class="email-from">Quinton &mdash; Invoice (Fri Reminder)</div>
+        <div class="email-subject">Send Quinton invoice tomorrow Fri 8 AM &mdash; draft it now</div>
+        <div class="email-snippet">Quinton's invoice (full year, June included) goes out Friday 8 AM. Draft or queue it tonight so it's ready to send first thing.</div>
+      </div>
+      <div class="email-draft">
+        <div class="email-draft-lbl"><div class="draft-dot"></div>Drafted Invoice Email &mdash; queue for Fri 8 AM</div>
+        <textarea class="draft-ta" id="draft-2">Hi Quinton,
+
+Please find your invoice attached for the full year of service, including June.
+
+[Invoice amount: $___]
+
+Payment is due within [X] days. You can pay via [payment link / Stripe / etc.].
+
+Thank you for your continued partnership — it's a pleasure working with you.
+
+Best,
+Hayden
+Amistad Digital</textarea>
+        <div class="email-actions">
+          <button class="btn-copy" onclick="copyDraft(2, this)">Copy Draft</button>
+          <a class="btn-gmail" href="https://mail.google.com/mail/u/0/#inbox" target="_blank">Open Gmail</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Urgent remaining -->
+    <div class="sec-hd"><span class="sec-title">Urgent Before You Close</span></div>
+    <div class="todos" id="urgentList">
+      <div class="todo" id="u0"><div class="tcb" onclick="toggleT('u0')"><div class="tcb-check"></div></div><span class="todo-text">Recharge GHL wallets (if not done this morning) &mdash; Samosa House + Chestnut Development</span><span class="tag-urgent">Urgent</span></div>
+      <div class="todo" id="u1"><div class="tcb" onclick="toggleT('u1')"><div class="tcb-check"></div></div><span class="todo-text">Confirm Fri 2 PM schedule conflict is resolved &mdash; one event must be moved</span><span class="tag-urgent">Before Fri</span></div>
+      <div class="todo" id="u2"><div class="tcb" onclick="toggleT('u2')"><div class="tcb-check"></div></div><span class="todo-text">Send Brad Jordan calendar invite for Jul 1 1:30 PM kickoff</span></div>
+      <div class="todo" id="u3"><div class="tcb" onclick="toggleT('u3')"><div class="tcb-check"></div></div><span class="todo-text">Respond to 2 unanswered Google reviews (Taco King + JMB Auto Sports)</span></div>
+      <div class="todo" id="u4"><div class="tcb" onclick="toggleT('u4')"><div class="tcb-check"></div></div><span class="todo-text">Queue Quinton invoice to send Fri 8 AM</span><span class="tag-tmrw">Fri 8 AM</span></div>
+    </div>
+    <div class="addrow">
+      <input class="addinput" id="urgentInput" placeholder="Add urgent task..." />
+      <button class="addbtn" onclick="addUrgent()">+ Add</button>
+    </div>
+
+    <!-- Tomorrow's bottleneck attack plan -->
+    <div class="sec-hd"><span class="sec-title">Tomorrow&rsquo;s Bottleneck Attack Plan</span></div>
+    <div class="bn-list">
+      <div class="bn-item">
+        <div class="bn-num">1</div>
+        <div class="bn-body">
+          <div class="bn-title">Fix Google Ads conversion tracking</div>
+          <div class="bn-why">Currently firing on every page load instead of actual lead submissions — you're flying blind on which ads produce leads. 1–2 hours in Google Ads + Tag Manager to fix. High leverage because it unblocks optimization of your entire ad spend.</div>
+          <span class="bn-tag high">High ROI / 2 hrs</span>
+        </div>
+      </div>
+      <div class="bn-item">
+        <div class="bn-num">2</div>
+        <div class="bn-body">
+          <div class="bn-title">Batch outreach to hit 40/week target</div>
+          <div class="bn-why">Only ~25 messages sent this week. 15 more needed to hit target. Sales velocity is directly tied to pipeline size — this is the single highest-leverage activity for new revenue. Block 60 mins first thing tomorrow.</div>
+          <span class="bn-tag high">Pipeline / 60 min</span>
+        </div>
+      </div>
+      <div class="bn-item">
+        <div class="bn-num">3</div>
+        <div class="bn-body">
+          <div class="bn-title">Set up Zapier error monitoring</div>
+          <div class="bn-why">You now have 2 active Zapier errors (Elite Landscapes + Holiday HVAC) with no alert system. One more undetected error could disrupt a client. 30 mins to set up a simple Slack or email notification for Zap failures.</div>
+          <span class="bn-tag med">Operations / 30 min</span>
+        </div>
+      </div>
+      <div class="bn-item">
+        <div class="bn-num">4</div>
+        <div class="bn-body">
+          <div class="bn-title">Follow up with Jonas on credit repair ads decision</div>
+          <div class="bn-why">You need to confirm or decline. Leaving this open wastes Jonas's time and creates ambiguity. 5 minutes to send the email — use the draft from this morning's briefing. Decide tonight or first thing tomorrow.</div>
+          <span class="bn-tag low">Quick win / 5 min</span>
+        </div>
+      </div>
+      <div class="bn-item">
+        <div class="bn-num">5</div>
+        <div class="bn-body">
+          <div class="bn-title">Post CSM job listing</div>
+          <div class="bn-why">CSM hiring is a Q2 Rock with 0 candidates in pipeline. Every week this stays idle is a week of missed screening time. Draft a simple listing on Indeed or LinkedIn — you don't need a perfect job post, you need a live one.</div>
+          <span class="bn-tag med">Hiring / 45 min</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- EOD Notes -->
+    <div class="sec-hd"><span class="sec-title">End of Day Notes</span></div>
+    <textarea class="note-area" placeholder="What happened today? What worked, what didn't? Any decisions to make tomorrow? Anything to hand off?"></textarea>
+
+  </main>
+
+  <script>
+    (function() {
+      const now = new Date();
+      const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      const d = `${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()}`;
+      document.getElementById('topDate').textContent = d;
+      document.getElementById('heroDate').textContent = d + ' · Here\'s how today went.';
+      document.getElementById('heroHeading').textContent = 'Closing out ' + days[now.getDay()];
+    })();
+
+    function copyDraft(idx, btn) {
+      const ta = document.getElementById('draft-' + idx);
+      navigator.clipboard.writeText(ta.value).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2200);
+      });
+    }
+
+    function toggleT(id) {
+      const el = document.getElementById(id);
+      const cb = el.querySelector('.tcb');
+      el.classList.toggle('done');
+      cb.classList.toggle('on');
+    }
+
+    function addUrgent() {
+      const inp = document.getElementById('urgentInput');
+      const v = inp.value.trim(); if(!v) return;
+      const id = 'u' + Date.now();
+      const d = document.createElement('div'); d.className = 'todo'; d.id = id;
+      d.innerHTML = `<div class="tcb" onclick="toggleT('${id}')"><div class="tcb-check"></div></div><span class="todo-text">${v}</span>`;
+      document.getElementById('urgentList').appendChild(d);
+      inp.value = '';
+    }
+    document.getElementById('urgentInput').addEventListener('keydown', e => { if(e.key==='Enter') addUrgent(); });
+  </script>
+</body>
+</html>

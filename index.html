@@ -37,10 +37,17 @@
     .g-timer { font-size: 12px; font-weight: 700; color: #fff; font-variant-numeric: tabular-nums; letter-spacing: .04em; }
     .topbar-date { font-size: 12px; color: #555; font-weight: 500; }
 
+    /* ── Page nav ───────────────── */
+    .page-nav { background: #0a0a0a; border-top: 1px solid rgba(255,255,255,.06); display: flex; padding: 0 24px; overflow-x: auto; position: sticky; top: 52px; z-index: 110; }
+    .page-nav::-webkit-scrollbar { display: none; }
+    .pn-tab { padding: 10px 14px; font-size: 12px; font-weight: 600; color: #555; white-space: nowrap; cursor: pointer; border-bottom: 2px solid transparent; transition: color .15s, border-color .15s; text-decoration: none; display: block; }
+    .pn-tab:hover { color: #bbb; }
+    .pn-tab.on { color: #fff; border-bottom-color: var(--accent); }
+
     /* ── Subnav ─────────────────── */
-    .subnav { background: var(--surface); border-bottom: 1px solid var(--border); display: flex; padding: 0 24px; overflow-x: auto; -webkit-overflow-scrolling: touch; position: sticky; top: 52px; z-index: 100; }
+    .subnav { background: var(--surface); border-bottom: 1px solid var(--border); display: flex; padding: 0 24px; overflow-x: auto; -webkit-overflow-scrolling: touch; position: sticky; top: 88px; z-index: 100; }
     .subnav::-webkit-scrollbar { display: none; }
-    .nav-tab { padding: 14px 12px; font-size: 13px; font-weight: 500; color: var(--muted); white-space: nowrap; cursor: pointer; border-bottom: 2px solid transparent; transition: color .15s, border-color .15s; user-select: none; }
+    .nav-tab { padding: 11px 10px; font-size: 12px; font-weight: 500; color: var(--muted); white-space: nowrap; cursor: pointer; border-bottom: 2px solid transparent; transition: color .15s, border-color .15s; user-select: none; }
     .nav-tab:hover { color: var(--text); }
     .nav-tab.on { color: var(--text); font-weight: 700; border-bottom-color: var(--accent); }
 
@@ -307,79 +314,24 @@
     </div>
   </header>
 
+  <nav class="page-nav">
+    <a class="pn-tab" href="morning.html">Morning Briefing</a>
+    <a class="pn-tab on" href="index.html">Level 10</a>
+    <a class="pn-tab" href="eod.html">End of Day</a>
+  </nav>
+
   <nav class="subnav">
-    <div class="nav-tab on">Level 10</div>
-    <div class="nav-tab">Clients</div>
-    <div class="nav-tab">Pipeline</div>
+    <div class="nav-tab on">Segue</div>
+    <div class="nav-tab">Scorecard</div>
+    <div class="nav-tab">Tracker</div>
     <div class="nav-tab">Rocks</div>
-    <div class="nav-tab">Team</div>
-    <div class="nav-tab">Financials</div>
-    <div class="nav-tab">Automations</div>
-    <div class="nav-tab">Strategy</div>
+    <div class="nav-tab">Headlines</div>
+    <div class="nav-tab">To-Do</div>
+    <div class="nav-tab">IDS</div>
+    <div class="nav-tab">Conclude</div>
   </nav>
 
   <main class="main">
-
-    <!-- ── CEO Briefing ─────────────────────────────── -->
-    <div class="brief" id="briefWrap">
-      <div class="brief-top">
-        <div>
-          <span class="brief-hello">Good morning, Hayden</span>
-          <span class="brief-sub" id="briefDate">Thursday, June 18 &middot; Here&rsquo;s what matters today</span>
-        </div>
-        <button class="brief-collapse" onclick="toggleBrief()">Collapse</button>
-      </div>
-
-      <div id="briefBody">
-        <div class="brief-kpis">
-          <div class="bkpi">
-            <div class="bkpi-lbl">Cash In Today</div>
-            <div class="bkpi-val green">$331.82</div>
-            <div class="bkpi-sub">$237.93 Stripe &middot; $93.89 Skool</div>
-          </div>
-          <div class="bkpi">
-            <div class="bkpi-lbl">New Booking</div>
-            <div class="bkpi-val">Brad Jordan</div>
-            <div class="bkpi-sub">Confirmed today &middot; July 1 &middot; 1:30 PM</div>
-          </div>
-          <div class="bkpi">
-            <div class="bkpi-lbl">New Lead</div>
-            <div class="bkpi-val amber">1 Momence</div>
-            <div class="bkpi-sub">Unread message waiting in inbox</div>
-          </div>
-        </div>
-
-        <div class="brief-cols">
-          <div>
-            <div class="brief-section-title">Today&rsquo;s Remaining Schedule</div>
-            <div class="brief-events">
-              <div class="bevent"><span class="bevent-time">12:00 PM</span><span class="bevent-name done">GBP &mdash; Wendy (done &middot; GBP verified)</span></div>
-              <div class="bevent"><span class="bevent-time">12:30 PM</span><span class="bevent-name done">HighLevel Affiliate call (done)</span></div>
-              <div class="bevent"><span class="bevent-time">3:00 PM</span><span class="bevent-name">Batch 20&ndash;30 reach outs</span></div>
-              <div class="bevent"><span class="bevent-time">4:00 PM</span><span class="bevent-name">Check on Jackie referral</span></div>
-              <div class="bevent"><span class="bevent-time">4:30 PM</span><span class="bevent-name">Coaching call</span></div>
-              <div class="bevent"><span class="bevent-time">5:00 PM</span><span class="bevent-name">Eye on inside out GBP</span></div>
-              <div class="bevent" style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.06);">
-                <span class="bevent-time" style="color:#555;">Fri 8 AM</span><span class="bevent-name">Send Quinton invoice (full year)</span>
-              </div>
-              <div class="bevent">
-                <span class="bevent-time" style="color:#555;">Fri 2 PM</span><span class="bevent-name hot">Dennis Mitch Referral &mdash; DOUBLE BOOKING</span>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <div class="brief-section-title">Alerts Needing Action</div>
-            <div class="brief-alerts-list">
-              <div class="balert crit"><div class="balert-dot"></div><div class="balert-text"><strong>2 GHL wallets suspended</strong> &mdash; Samosa House + Chestnut Development. Fix before this meeting.</div></div>
-              <div class="balert warn"><div class="balert-dot"></div><div class="balert-text"><strong>New Zapier error</strong> &mdash; Elite Landscapes LLC REP MGMT Zap. Check with David.</div></div>
-              <div class="balert warn"><div class="balert-dot"></div><div class="balert-text"><strong>Double booking Fri 2 PM</strong> &mdash; Hayden Larance call vs. Dennis Mitch Referral. Reschedule one.</div></div>
-              <div class="balert info"><div class="balert-dot"></div><div class="balert-text"><strong>2 new Google reviews</strong> &mdash; Mary &rarr; Taco King, Sophia &rarr; JMB Auto Sports. Respond today.</div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- Alert -->
     <div class="alert">
@@ -467,19 +419,17 @@
         <table class="sc-table">
           <thead><tr><th>Metric</th><th>Target</th><th>Actual</th><th>Status</th></tr></thead>
           <tbody>
-            <tr><td><span class="m-name">Monthly Revenue</span></td><td><span class="m-tgt">$15K</span></td><td><div class="m-act"><span class="m-val">$988</span><div class="mbar"><div class="mfill" style="width:7%;background:#dc2626;"></div></div></div></td><td><span class="badge br">Off Track</span></td></tr>
             <tr><td><span class="m-name">Active Clients</span></td><td><span class="m-tgt">20</span></td><td><div class="m-act"><span class="m-val">15</span><div class="mbar"><div class="mfill" style="width:75%;background:#f59e0b;"></div></div></div></td><td><span class="badge ba">Behind</span></td></tr>
             <tr><td><span class="m-name">GHL Accounts Healthy</span></td><td><span class="m-tgt">100%</span></td><td><div class="m-act"><span class="m-val">87%</span><div class="mbar"><div class="mfill" style="width:87%;background:#f59e0b;"></div></div></div></td><td><span class="badge ba">Behind</span></td></tr>
             <tr><td><span class="m-name">Sales Calls / Wk</span></td><td><span class="m-tgt">10</span></td><td><div class="m-act"><span class="m-val">3</span><div class="mbar"><div class="mfill" style="width:30%;background:#dc2626;"></div></div></div></td><td><span class="badge br">Off Track</span></td></tr>
             <tr><td><span class="m-name">Outreach Sent / Wk</span></td><td><span class="m-tgt">40</span></td><td><div class="m-act"><span class="m-val">~25</span><div class="mbar"><div class="mfill" style="width:63%;background:#f59e0b;"></div></div></div></td><td><span class="badge ba">Behind</span></td></tr>
             <tr><td><span class="m-name">Client Reviews Responded</span></td><td><span class="m-tgt">100%</span></td><td><div class="m-act"><span class="m-val">0 / 9</span><div class="mbar"><div class="mfill" style="width:0%;background:#dc2626;"></div></div></div></td><td><span class="badge br">Off Track</span></td></tr>
             <tr><td><span class="m-name">Automations Running</span></td><td><span class="m-tgt">15</span></td><td><div class="m-act"><span class="m-val">14</span><div class="mbar"><div class="mfill" style="width:93%;background:#16a34a;"></div></div></div></td><td><span class="badge bg">On Track</span></td></tr>
-            <tr><td><span class="m-name">Stripe Payout (Week)</span></td><td><span class="m-tgt">$3K</span></td><td><div class="m-act"><span class="m-val">$988</span><div class="mbar"><div class="mfill" style="width:33%;background:#f59e0b;"></div></div></div></td><td><span class="badge ba">Behind</span></td></tr>
           </tbody>
         </table>
         <div class="sc-summary">
-          <div class="sct"><div class="sct-n c-red">3</div><div class="sct-l">Off Track</div></div>
-          <div class="sct"><div class="sct-n c-amber">4</div><div class="sct-l">Behind</div></div>
+          <div class="sct"><div class="sct-n c-red">2</div><div class="sct-l">Off Track</div></div>
+          <div class="sct"><div class="sct-n c-amber">3</div><div class="sct-l">Behind</div></div>
           <div class="sct"><div class="sct-n c-green">1</div><div class="sct-l">On Track</div></div>
         </div>
       </div>
@@ -668,15 +618,6 @@
     // Set date
     const now = new Date();
     document.getElementById('topDate').textContent = now.toLocaleDateString('en-US', { weekday:'short', month:'long', day:'numeric' });
-    document.getElementById('briefDate').textContent = now.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric' }) + ' · Here’s what matters today';
-
-    // Brief collapse
-    let briefOpen = true;
-    function toggleBrief() {
-      briefOpen = !briefOpen;
-      document.getElementById('briefBody').style.display = briefOpen ? 'block' : 'none';
-      document.querySelector('.brief-collapse').textContent = briefOpen ? 'Collapse' : 'Expand';
-    }
 
     // Meeting timer
     let running = false, gSecs = 0, curSec = 0, secSecs = 300;
