@@ -258,6 +258,29 @@ Amistad Digital</textarea>
 
     <div class="email-card">
       <div class="email-hd">
+        <div class="email-from">Kerin &middot; Aspire Ann Arbor &mdash; Reply if not done yet</div>
+        <div class="email-subject">Email Drip Campaigns with Leads &mdash; she wants to do this together</div>
+        <div class="email-snippet">&ldquo;Hi Hayden, You and I discussed these email drip automations during our last meeting. I know that you have a lot on your plate but I am hoping that we can set these up together.&rdquo; &mdash; Sent 5:27 PM. Reply with a call booking.</div>
+      </div>
+      <div class="email-draft">
+        <div class="email-draft-lbl"><div class="draft-dot"></div>Drafted Reply</div>
+        <textarea class="draft-ta" id="draft-kerin">Hi Kerin,
+
+You're right — we talked about this and I want to get it done! Let's set up a quick 30-minute call to map out your email drip automations together. I have availability Thursday afternoon or Friday morning.
+
+I'll send over a booking link now.
+
+Best,
+Hayden</textarea>
+        <div class="email-actions">
+          <button class="btn-copy" onclick="copyDraft('kerin', this)">Copy Reply</button>
+          <a class="btn-gmail" href="https://mail.google.com/mail/u/0/#inbox" target="_blank">Open Gmail</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-hd">
         <div class="email-from">Quinton &mdash; Invoice (Fri Reminder)</div>
         <div class="email-subject">Send Quinton invoice tomorrow Fri 8 AM &mdash; draft it now</div>
         <div class="email-snippet">Quinton's invoice (full year, June included) goes out Friday 8 AM. Draft or queue it tonight so it's ready to send first thing.</div>
@@ -292,6 +315,10 @@ Amistad Digital</textarea>
       <div class="todo" id="u2"><div class="tcb" onclick="toggleT('u2')"><div class="tcb-check"></div></div><span class="todo-text">Send Brad Jordan calendar invite for Jul 1 1:30 PM kickoff</span></div>
       <div class="todo" id="u3"><div class="tcb" onclick="toggleT('u3')"><div class="tcb-check"></div></div><span class="todo-text">Respond to 2 unanswered Google reviews (Taco King + JMB Auto Sports)</span></div>
       <div class="todo" id="u4"><div class="tcb" onclick="toggleT('u4')"><div class="tcb-check"></div></div><span class="todo-text">Queue Quinton invoice to send Fri 8 AM</span><span class="tag-tmrw">Fri 8 AM</span></div>
+      <div class="todo" id="u5"><div class="tcb" onclick="toggleT('u5')"><div class="tcb-check"></div></div><span class="todo-text">Close ClickUp escalation ticket &mdash; new ticket in #amistaddigitalticketescalation (+ 2 chat escalations today)</span><span class="tag-urgent">ClickUp</span></div>
+      <div class="todo" id="u6"><div class="tcb" onclick="toggleT('u6')"><div class="tcb-check"></div></div><span class="todo-text">AMK Properties &mdash; David finishing setup, you need to set up payment before EOD</span><span class="tag-tmrw">Payment</span></div>
+      <div class="todo" id="u7"><div class="tcb" onclick="toggleT('u7')"><div class="tcb-check"></div></div><span class="todo-text">Tracy Rose Realtor &mdash; new task in pipeline, check ClickUp for details</span></div>
+      <div class="todo" id="u8"><div class="tcb" onclick="toggleT('u8')"><div class="tcb-check"></div></div><span class="todo-text">Confirm Dennis Mitch Fri 2 PM is clear (upsell AI employee, setup Stripe &mdash; 2:00&ndash;3:15 PM block)</span><span class="tag-urgent">Fri</span></div>
     </div>
     <div class="addrow">
       <input class="addinput" id="urgentInput" placeholder="Add urgent task..." />
@@ -361,7 +388,7 @@ Amistad Digital</textarea>
     })();
 
     function copyDraft(idx, btn) {
-      const ta = document.getElementById('draft-' + idx);
+      const ta = document.getElementById('draft-' + String(idx));
       navigator.clipboard.writeText(ta.value).then(() => {
         const orig = btn.textContent;
         btn.textContent = 'Copied!';
