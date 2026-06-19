@@ -149,22 +149,22 @@
       <div class="wins-grid">
         <div class="win-tile green">
           <div class="win-lbl">Closes Today</div>
-          <input class="win-input" id="closesInput" placeholder="0" value="1" />
-          <div class="win-sub">Brad Jordan &mdash; confirmed, starts Jul 1</div>
+          <input class="win-input" id="closesInput" placeholder="0" value="0" />
+          <div class="win-sub">Won opportunities today &middot; auto</div>
         </div>
         <div class="win-tile green">
           <div class="win-lbl">Meetings Booked</div>
-          <input class="win-input" id="bookingsInput" placeholder="0" value="1" />
-          <div class="win-sub">Brad Jordan &mdash; Jul 1, 1:30 PM</div>
+          <input class="win-input" id="bookingsInput" placeholder="0" value="" />
+          <div class="win-sub">Enter manually for now</div>
         </div>
         <div class="win-tile amber">
           <div class="win-lbl">Cash Collected</div>
-          <input class="win-input" id="cashInput" placeholder="$0" value="$331.82" />
-          <div class="win-sub">$237.93 Stripe · $93.89 Skool</div>
+          <input class="win-input" id="cashInput" placeholder="$0" value="$0" />
+          <div class="win-sub">GHL won value &middot; Stripe separate</div>
         </div>
         <div class="win-tile">
           <div class="win-lbl">Outreach Sent</div>
-          <input class="win-input" id="outreachInput" placeholder="0" value="" />
+          <input class="win-input" id="outreachInput" placeholder="0" value="0" />
           <div class="win-sub">Target: 40/week</div>
         </div>
       </div>
@@ -180,7 +180,7 @@
       </div>
       <div class="act-tile">
         <div class="act-lbl">Outreach Messages</div>
-        <input class="act-input" placeholder="0" type="number" min="0" />
+        <input class="act-input" id="actOutreach" placeholder="0" type="number" min="0" value="0" />
         <div class="act-hint">Target: 40/week</div>
       </div>
       <div class="act-tile">
@@ -200,7 +200,7 @@
       </div>
       <div class="act-tile">
         <div class="act-lbl">New Leads In</div>
-        <input class="act-input" placeholder="0" type="number" min="0" />
+        <input class="act-input" id="actNewLeads" placeholder="0" type="number" min="0" value="0" />
         <div class="act-hint">Inbound + outbound</div>
       </div>
     </div>
